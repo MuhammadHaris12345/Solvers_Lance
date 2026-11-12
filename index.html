@@ -1,2304 +1,384 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solvers-Lance — Ready-to-Launch Management Systems for Pakistani Businesses</title>
-  <meta name="description" content="Solvers-Lance builds AI-powered management systems with Laravel + MySQL for Pakistani businesses. Source code included. School, Installment, Jewellery, Pharmacy, Clinic, Real Estate, Restaurant POS, Mobile Shop & HR systems." />
-  <meta name="keywords" content="management system Pakistan, Laravel software, AI business software, school management system, installment software, jewellery software Pakistan" />
-  <meta property="og:title" content="Solvers-Lance — Management Systems That Think" />
-  <meta property="og:description" content="Ready-to-launch, AI-powered management systems built for Pakistani businesses. Full source code. 15-day free trial." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_PK" />
-  <meta name="theme-color" content="#07090F" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2307090F'/><text y='.9em' font-size='70' x='50%' text-anchor='middle' fill='%23D4AF37'>SL</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Solvers-Lance",
-    "description": "Freelance software studio building AI-powered management systems for Pakistani businesses using Laravel and MySQL.",
-    "url": "https://solvers-lance.example",
-    "email": "[Email]",
-    "telephone": "[Phone / WhatsApp]",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "[City]",
-      "addressCountry": "PK"
-    },
-    "sameAs": []
-  }
-  </script>
-  <style>
-    :root {
-      --bg: #07090F;
-      --bg-elevated: #0C101B;
-      --bg-card: rgba(16, 22, 36, 0.72);
-      --bg-card-solid: #101624;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.14);
-      --text: #F4F6FB;
-      --text-muted: #9AA3B8;
-      --text-dim: #6B7388;
-      --accent: #7C5CFF;
-      --accent-2: #A855F7;
-      --accent-3: #22D3EE;
-      --gold: #D4AF37;
-      --gold-dim: rgba(212, 175, 55, 0.18);
-      --success: #34D399;
-      --danger: #F87171;
-      --gradient: linear-gradient(135deg, #7C5CFF 0%, #A855F7 45%, #22D3EE 100%);
-      --gradient-text: linear-gradient(105deg, #E0E7FF 0%, #C4B5FD 35%, #A5F3FC 70%, #FDE68A 100%);
-      --shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
-      --radius: 18px;
-      --radius-sm: 12px;
-      --nav-h: 72px;
-      --font-head: "Sora", system-ui, sans-serif;
-      --font-body: "Inter", system-ui, sans-serif;
-      --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-    }
-
-    [data-theme="light"] {
-      --bg: #F4F6FB;
-      --bg-elevated: #FFFFFF;
-      --bg-card: rgba(255, 255, 255, 0.78);
-      --bg-card-solid: #FFFFFF;
-      --border: rgba(15, 23, 42, 0.08);
-      --border-strong: rgba(15, 23, 42, 0.14);
-      --text: #0F172A;
-      --text-muted: #475569;
-      --text-dim: #64748B;
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-      --gold-dim: rgba(212, 175, 55, 0.22);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: var(--noise);
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.45;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-    img, svg { display: block; max-width: 100%; }
-    ul { list-style: none; }
-    input, select, textarea { font-family: inherit; font-size: 1rem; }
-
-    .container {
-      width: min(1180px, 100% - 2rem);
-      margin-inline: auto;
-    }
-
-    /* ——— Typography ——— */
-    h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; }
-    .gradient-text {
-      background: var(--gradient-text);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* ——— Buttons ——— */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-      white-space: nowrap;
-    }
-    .btn:focus-visible { outline: 2px solid var(--accent-3); outline-offset: 3px; }
-    .btn-primary {
-      background: var(--gradient);
-      color: #fff;
-      box-shadow: 0 8px 28px rgba(124, 92, 255, 0.35);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(124, 92, 255, 0.45); }
-    .btn-ghost {
-      background: transparent;
-      border: 1px solid var(--border-strong);
-      color: var(--text);
-    }
-    .btn-ghost:hover { border-color: var(--accent); background: rgba(124, 92, 255, 0.08); transform: translateY(-1px); }
-    .btn-gold {
-      background: linear-gradient(135deg, #D4AF37, #F0D78C);
-      color: #1a1408;
-      font-weight: 700;
-    }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212, 175, 55, 0.35); }
-    .btn-sm { padding: 0.55rem 1.1rem; font-size: 0.85rem; }
-    .btn-full { width: 100%; }
-
-    /* ——— Navbar ——— */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
-      backdrop-filter: blur(16px) saturate(1.4);
-      -webkit-backdrop-filter: blur(16px) saturate(1.4);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s ease;
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: min(1180px, 100% - 2rem);
-      margin-inline: auto;
-      gap: 1rem;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
-    }
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--gradient);
-      display: grid;
-      place-items: center;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(124, 92, 255, 0.4);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.15rem;
-    }
-    .nav-links a {
-      padding: 0.45rem 0.85rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      border-radius: 8px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--text); background: rgba(124, 92, 255, 0.1); }
-    .nav-actions { display: flex; align-items: center; gap: 0.6rem; }
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      display: grid;
-      place-items: center;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .theme-toggle:hover { border-color: var(--accent); background: rgba(124, 92, 255, 0.08); }
-    .theme-toggle svg { width: 18px; height: 18px; }
-    .hamburger {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .hamburger span {
-      display: block;
-      width: 18px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: transform 0.25s, opacity 0.25s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: var(--nav-h);
-      left: 0;
-      right: 0;
-      background: var(--bg-elevated);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem;
-      flex-direction: column;
-      gap: 0.35rem;
-      z-index: 999;
-      box-shadow: var(--shadow);
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      padding: 0.75rem 1rem;
-      border-radius: 10px;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-    .mobile-menu a:hover { background: rgba(124, 92, 255, 0.1); color: var(--text); }
-
-    /* ——— Hero ——— */
-    .hero {
-      position: relative;
-      padding: 5rem 0 4rem;
-      overflow: hidden;
-    }
-    .hero-orbs {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.45;
-      animation: float 18s ease-in-out infinite;
-    }
-    .orb-1 { width: 420px; height: 420px; background: #7C5CFF; top: -120px; left: -80px; }
-    .orb-2 { width: 360px; height: 360px; background: #22D3EE; top: 20%; right: -100px; animation-delay: -6s; }
-    .orb-3 { width: 280px; height: 280px; background: #A855F7; bottom: -60px; left: 35%; animation-delay: -12s; opacity: 0.3; }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -40px) scale(1.05); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      border: 1px solid var(--border-strong);
-      background: rgba(124, 92, 255, 0.08);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-    }
-    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 8px var(--success); }
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      margin-bottom: 1.1rem;
-      letter-spacing: -0.04em;
-    }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 34ch;
-      margin-bottom: 1.75rem;
-    }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; }
-    .trust-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .chip {
-      padding: 0.35rem 0.75rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-    .chip.gold { border-color: rgba(212, 175, 55, 0.4); color: var(--gold); background: var(--gold-dim); }
-
-    /* Dashboard mockup */
-    .dash-mock {
-      position: relative;
-      border-radius: var(--radius);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(20px);
-      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.06);
-      padding: 1rem;
-      overflow: hidden;
-    }
-    .dash-mock::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(124,92,255,0.5), transparent 40%, rgba(34,211,238,0.4));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-    .dash-top {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .dash-dots { display: flex; gap: 6px; }
-    .dash-dots span { width: 9px; height: 9px; border-radius: 50%; }
-    .dash-dots span:nth-child(1) { background: #F87171; }
-    .dash-dots span:nth-child(2) { background: #FBBF24; }
-    .dash-dots span:nth-child(3) { background: #34D399; }
-    .dash-title { font-size: 0.8rem; color: var(--text-muted); margin-left: 0.5rem; font-weight: 500; }
-    .dash-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    .dash-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.85rem;
-    }
-    .dash-card.wide { grid-column: 1 / -1; }
-    .dash-label { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.04em; }
-    .dash-value { font-family: var(--font-head); font-size: 1.35rem; font-weight: 700; }
-    .dash-value.up { color: var(--success); }
-    .dash-chart {
-      height: 56px;
-      display: flex;
-      align-items: flex-end;
-      gap: 4px;
-      margin-top: 0.5rem;
-    }
-    .dash-chart span {
-      flex: 1;
-      background: var(--gradient);
-      border-radius: 3px 3px 0 0;
-      opacity: 0.85;
-      animation: barGrow 1.4s ease-out backwards;
-    }
-    @keyframes barGrow {
-      from { transform: scaleY(0); transform-origin: bottom; }
-    }
-    .dash-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.78rem;
-    }
-    .dash-row:last-child { border-bottom: none; }
-    .dash-pill {
-      padding: 0.15rem 0.5rem;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-    .dash-pill.green { background: rgba(52,211,153,0.15); color: var(--success); }
-    .dash-pill.amber { background: rgba(251,191,36,0.15); color: #FBBF24; }
-
-    /* ——— Stats ——— */
-    .stats {
-      padding: 2.5rem 0;
-      border-block: 1px solid var(--border);
-      background: linear-gradient(180deg, transparent, rgba(124,92,255,0.04), transparent);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      text-align: center;
-    }
-    .stat-num {
-      font-family: var(--font-head);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.25rem;
-    }
-    .stat-label { font-size: 0.875rem; color: var(--text-muted); }
-
-    /* ——— Sections common ——— */
-    section { padding: 5rem 0; }
-    .section-head {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 3rem;
-    }
-    .section-eyebrow {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-    .section-head h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      margin-bottom: 0.85rem;
-    }
-    .section-head p { color: var(--text-muted); font-size: 1.05rem; }
-
-    /* ——— Systems grid ——— */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .filter-chip {
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-    .filter-chip:hover { border-color: var(--accent); color: var(--text); }
-    .filter-chip.active {
-      background: var(--gradient);
-      border-color: transparent;
-      color: #fff;
-    }
-
-    .systems-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.25rem;
-    }
-    .sys-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      backdrop-filter: blur(16px);
-      transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .sys-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(124,92,255,0.12), transparent 40%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-    .sys-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(124,92,255,0.35);
-      box-shadow: 0 20px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(124,92,255,0.15);
-    }
-    .sys-card:hover::after { opacity: 1; }
-    .sys-card.featured {
-      border-color: rgba(212,175,55,0.35);
-    }
-    .sys-card.featured::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      background: linear-gradient(135deg, rgba(212,175,55,0.5), transparent 50%, rgba(124,92,255,0.3));
-      z-index: -1;
-      animation: borderPulse 4s ease-in-out infinite;
-    }
-    @keyframes borderPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-    .sys-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(124,92,255,0.12);
-      display: grid;
-      place-items: center;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-    .sys-icon svg { width: 24px; height: 24px; }
-    .sys-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem; }
-    .sys-name { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; }
-    .ai-badge {
-      flex-shrink: 0;
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      background: var(--gradient);
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.04em;
-    }
-    .sys-pitch { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
-    .sys-features {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      margin-bottom: 1.1rem;
-      flex: 1;
-    }
-    .sys-features li {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      padding-left: 1.1rem;
-      position: relative;
-    }
-    .sys-features li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.45em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.7;
-    }
-    .sys-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 1.1rem;
-    }
-    .sys-tag {
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-    }
-    .sys-price {
-      font-size: 0.85rem;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 0.85rem;
-    }
-
-    /* ——— Reveal ——— */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* ——— AI Power ——— */
-    .ai-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-    .ai-features {
-      display: grid;
-      gap: 1rem;
-    }
-    .ai-feat {
-      display: flex;
-      gap: 1rem;
-      padding: 1.15rem;
-      border-radius: var(--radius-sm);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      transition: border-color 0.25s;
-    }
-    .ai-feat:hover { border-color: rgba(124,92,255,0.35); }
-    .ai-feat-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: rgba(124,92,255,0.12);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      color: var(--accent);
-    }
-    .ai-feat-icon svg { width: 20px; height: 20px; }
-    .ai-feat h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
-    .ai-feat p { font-size: 0.85rem; color: var(--text-muted); }
-
-    .ai-chat {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      backdrop-filter: blur(16px);
-      display: flex;
-      flex-direction: column;
-      min-height: 420px;
-    }
-    .ai-chat-header {
-      padding: 1rem 1.15rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .ai-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--gradient);
-      display: grid;
-      place-items: center;
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: #fff;
-    }
-    .ai-chat-header h4 { font-size: 0.95rem; }
-    .ai-chat-header span { font-size: 0.75rem; color: var(--success); }
-    .ai-messages {
-      flex: 1;
-      padding: 1.15rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      overflow-y: auto;
-      max-height: 320px;
-    }
-    .msg {
-      max-width: 88%;
-      padding: 0.75rem 1rem;
-      border-radius: 14px;
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-    .msg.user {
-      align-self: flex-end;
-      background: rgba(124,92,255,0.18);
-      border: 1px solid rgba(124,92,255,0.25);
-      border-bottom-right-radius: 4px;
-    }
-    .msg.bot {
-      align-self: flex-start;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 4px;
-    }
-    .typing {
-      display: flex;
-      gap: 4px;
-      padding: 0.85rem 1rem;
-      align-self: flex-start;
-    }
-    .typing span {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--text-dim);
-      animation: typingDot 1.2s infinite;
-    }
-    .typing span:nth-child(2) { animation-delay: 0.2s; }
-    .typing span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingDot {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-5px); opacity: 1; }
-    }
-    .ai-suggestions {
-      padding: 0.75rem 1rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-    .ai-sug {
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-    .ai-sug:hover { border-color: var(--accent); color: var(--text); background: rgba(124,92,255,0.08); }
-
-    /* ——— Marketing Kit Bento ——— */
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: minmax(120px, auto);
-      gap: 1rem;
-    }
-    .bento-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1.25rem;
-      backdrop-filter: blur(12px);
-      transition: transform 0.25s, border-color 0.25s;
-      display: flex;
-      flex-direction: column;
-    }
-    .bento-item:hover {
-      transform: translateY(-3px);
-      border-color: rgba(124,92,255,0.3);
-    }
-    .bento-item.span-2 { grid-column: span 2; }
-    .bento-item.span-2-row { grid-row: span 2; }
-    .bento-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
-      background: rgba(124,92,255,0.12);
-      display: grid;
-      place-items: center;
-      margin-bottom: 0.75rem;
-      color: var(--accent);
-    }
-    .bento-icon svg { width: 18px; height: 18px; }
-    .bento-item h4 { font-size: 0.95rem; margin-bottom: 0.35rem; }
-    .bento-item p { font-size: 0.82rem; color: var(--text-muted); flex: 1; }
-    .bento-note {
-      margin-top: 2rem;
-      text-align: center;
-      padding: 1.25rem;
-      border-radius: var(--radius-sm);
-      border: 1px dashed rgba(212,175,55,0.4);
-      background: var(--gold-dim);
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    .bento-note strong { color: var(--gold); }
-
-    /* ——— Timeline ——— */
-    .timeline {
-      position: relative;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 20px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-3));
-      opacity: 0.4;
-    }
-    .tl-item {
-      position: relative;
-      padding-left: 56px;
-      padding-bottom: 2.25rem;
-    }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-dot {
-      position: absolute;
-      left: 10px;
-      top: 4px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--accent);
-      display: grid;
-      place-items: center;
-      z-index: 1;
-    }
-    .tl-dot span {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    .tl-step {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-    .tl-item h4 { font-size: 1.05rem; margin-bottom: 0.35rem; }
-    .tl-item p { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* ——— Pricing ——— */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      align-items: stretch;
-    }
-    .price-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-    .price-card.featured {
-      border-color: rgba(124,92,255,0.45);
-      box-shadow: 0 0 0 1px rgba(124,92,255,0.2), 0 24px 56px rgba(124,92,255,0.12);
-    }
-    .price-card.featured::before {
-      content: "Most Popular";
-      position: absolute;
-      top: 14px;
-      right: -28px;
-      background: var(--gradient);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 0.3rem 2.5rem;
-      transform: rotate(35deg);
-      letter-spacing: 0.04em;
-    }
-    .price-tier {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-dim);
-      margin-bottom: 0.5rem;
-    }
-    .price-amount {
-      font-family: var(--font-head);
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 0.25rem;
-    }
-    .price-amount span { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
-    .price-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem; }
-    .price-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      margin-bottom: 1.5rem;
-      flex: 1;
-    }
-    .price-list li {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
-    .price-list li svg { flex-shrink: 0; margin-top: 3px; color: var(--success); }
-    .price-note {
-      margin-top: 2rem;
-      padding: 1.25rem 1.5rem;
-      border-radius: var(--radius-sm);
-      background: rgba(248,113,113,0.06);
-      border: 1px solid rgba(248,113,113,0.2);
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-    .price-note strong { color: var(--text); }
-
-    /* ——— FAQ ——— */
-    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.65rem; }
-    .faq-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-    }
-    .faq-q {
-      width: 100%;
-      text-align: left;
-      padding: 1.1rem 1.25rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      transition: background 0.2s;
-    }
-    .faq-q:hover { background: rgba(124,92,255,0.05); }
-    .faq-q svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      transition: transform 0.3s;
-      color: var(--text-dim);
-    }
-    .faq-item.open .faq-q svg { transform: rotate(180deg); }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.35s ease;
-      padding: 0 1.25rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-    .faq-item.open .faq-a {
-      max-height: 300px;
-      padding: 0 1.25rem 1.15rem;
-    }
-
-    /* ——— Final CTA + Form ——— */
-    .cta-banner {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-banner::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(124,92,255,0.2), transparent 70%);
-      pointer-events: none;
-    }
-    .cta-banner h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
-    .cta-banner > div > p { color: var(--text-muted); margin-bottom: 1.25rem; }
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 0.35rem;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.25);
-      color: var(--text);
-      transition: border-color 0.2s;
-    }
-    [data-theme="light"] .form-group input,
-    [data-theme="light"] .form-group select,
-    [data-theme="light"] .form-group textarea {
-      background: rgba(255,255,255,0.8);
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .form-group textarea { resize: vertical; min-height: 90px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-
-    /* ——— Footer ——— */
-    footer {
-      padding: 4rem 0 2rem;
-      border-top: 1px solid var(--border);
-      margin-top: 2rem;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .footer-about p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-top: 0.85rem;
-      max-width: 28ch;
-    }
-    .footer-col h5 {
-      font-family: var(--font-head);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-    .footer-col a {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      padding: 0.25rem 0;
-      transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--accent-3); }
-    .socials {
-      display: flex;
-      gap: 0.6rem;
-      margin-top: 1.25rem;
-    }
-    .socials a {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      display: grid;
-      place-items: center;
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-    .socials a:hover { border-color: var(--accent); color: var(--accent); background: rgba(124,92,255,0.1); }
-    .socials svg { width: 16px; height: 16px; }
-    .footer-bottom {
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      font-size: 0.82rem;
-      color: var(--text-dim);
-    }
-
-    /* ——— Modal ——— */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-    }
-    .modal-overlay.open { opacity: 1; visibility: visible; }
-    .modal {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius);
-      width: min(720px, 100%);
-      max-height: min(88vh, 900px);
-      overflow-y: auto;
-      transform: translateY(20px) scale(0.97);
-      transition: transform 0.3s ease;
-      box-shadow: var(--shadow);
-    }
-    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-    .modal-header {
-      position: sticky;
-      top: 0;
-      background: var(--bg-elevated);
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      z-index: 1;
-    }
-    .modal-header h3 { font-size: 1.25rem; }
-    .modal-close {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .modal-close:hover { background: rgba(248,113,113,0.1); border-color: var(--danger); }
-    .modal-body { padding: 1.5rem; }
-    .modal-section { margin-bottom: 1.5rem; }
-    .modal-section h4 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-    .modal-section p, .modal-section li { font-size: 0.9rem; color: var(--text-muted); }
-    .modal-section ul { display: flex; flex-direction: column; gap: 0.35rem; }
-    .modal-section li {
-      padding-left: 1rem;
-      position: relative;
-    }
-    .modal-section li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-    .modal-roles {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-    .modal-roles span {
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      background: rgba(124,92,255,0.1);
-      border: 1px solid rgba(124,92,255,0.2);
-      font-size: 0.78rem;
-      font-weight: 500;
-    }
-    .modal-footer {
-      padding: 1.15rem 1.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      position: sticky;
-      bottom: 0;
-      background: var(--bg-elevated);
-    }
-
-    /* ——— Marquee ——— */
-    .marquee-wrap {
-      overflow: hidden;
-      padding: 1rem 0;
-      border-block: 1px solid var(--border);
-      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    }
-    .marquee {
-      display: flex;
-      gap: 2.5rem;
-      width: max-content;
-      animation: marquee 40s linear infinite;
-    }
-    .marquee span {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-dim);
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .marquee span::before {
-      content: "";
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.6;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* ——— Responsive ——— */
-    @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .ai-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
-      .bento { grid-template-columns: repeat(2, 1fr); }
-      .bento-item.span-2 { grid-column: span 2; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .cta-banner { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    }
-    @media (max-width: 768px) {
-      .nav-links, .nav-actions .btn { display: none; }
-      .hamburger { display: flex; }
-      .hero { padding: 3.5rem 0 3rem; }
-      .systems-grid { grid-template-columns: 1fr; }
-      .bento { grid-template-columns: 1fr; }
-      .bento-item.span-2 { grid-column: span 1; }
-      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .dash-body { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 420px) {
-      .hero-ctas { flex-direction: column; }
-      .hero-ctas .btn { width: 100%; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* Focus */
-    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-      outline: 2px solid var(--accent-3);
-      outline-offset: 2px;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solvers-Lance | AI-Powered Management Systems for Pakistani Businesses</title>
+<meta name="description" content="Ready-to-launch management systems, powered by AI, built for Pakistani businesses. Laravel + MySQL, full source code, 15-day free trial. Get a custom quote on WhatsApp.">
+<meta property="og:title" content="Solvers-Lance | Management Systems That Think">
+<meta property="og:description" content="School, installment, jewellery, pharmacy, clinic, HR and more. Laravel + MySQL with AI. Full source code delivered.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#07090F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Solvers-Lance","description":"Freelance software studio building AI-powered management systems for Pakistani businesses.","telephone":"+923102536233","founder":{"@id":"#haris"}},{"@type":"Person","@id":"#haris","name":"Muhammad Haris","jobTitle":"Founder & Lead Developer","telephone":"+923102536233","worksFor":{"@type":"Organization","name":"Solvers-Lance"}}]}</script>
+<style>
+/* ===== Design tokens ===== */
+:root{--bg:#07090F;--bg2:#0c1020;--tx:#eef0f8;--mut:#9aa3bd;--card:rgba(255,255,255,.045);--bd:rgba(255,255,255,.1);--ac1:#6366f1;--ac2:#8b5cf6;--ac3:#22d3ee;--gold:#D4AF37;--grad:linear-gradient(120deg,#6366f1,#8b5cf6 50%,#22d3ee);--nav:rgba(7,9,15,.7);--sh:0 20px 60px rgba(0,0,0,.45);--r:22px}
+[data-theme=light]{--bg:#f5f6fb;--bg2:#e9ecf7;--tx:#10142a;--mut:#4b5473;--card:rgba(255,255,255,.7);--bd:rgba(20,25,60,.12);--gold:#9a7a12;--nav:rgba(245,246,251,.75);--sh:0 20px 50px rgba(30,40,100,.15)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.65 Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:100;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;line-height:1.12;letter-spacing:-.03em}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac3);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}section{padding:96px 0;position:relative}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-h{max-width:720px;margin-bottom:46px}.sec-h h2{font-size:clamp(30px,4.5vw,48px)}.sec-h p{color:var(--mut);margin-top:14px}
+.tag{display:inline-block;color:var(--gold);font-weight:600;font-size:14px;margin-bottom:10px}
+.glass{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);position:relative;overflow:hidden}
+.spot::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.22),transparent 60%)}
+.spot:hover::before{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:600;border:1px solid var(--bd);background:var(--card);transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px)}.btn.p{background:var(--grad);border:0;color:#fff;box-shadow:0 10px 30px rgba(99,102,241,.4)}
+.btn.p:hover{box-shadow:0 14px 40px rgba(139,92,246,.55)}.btn.g{border-color:var(--gold);color:var(--gold)}
+/* nav */
+header{position:sticky;top:0;z-index:50;background:var(--nav);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--bd)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
+.logo{display:flex;align-items:center;gap:10px;font:700 18px Sora}.mono{width:38px;height:38px;border-radius:11px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:15px}
+.links{display:flex;gap:4px}.links a{padding:8px 12px;border-radius:99px;color:var(--mut);font-size:14px;font-weight:500;transition:.2s}
+.links a:hover,.links a.on{color:var(--tx);background:var(--card)}.links a.on{box-shadow:inset 0 -2px 0 var(--ac3)}
+.nr{display:flex;gap:8px;align-items:center}.ib{width:40px;height:40px;border-radius:50%;border:1px solid var(--bd);background:var(--card);display:grid;place-items:center}
+.burger{display:none}
+@media(max-width:1040px){.burger{display:grid}.links{position:absolute;top:68px;left:0;right:0;flex-direction:column;padding:14px 22px;background:var(--bg);border-bottom:1px solid var(--bd);display:none}.links.open{display:flex}.nr .btn{display:none}}
+/* hero */
+.hero{padding:70px 0 90px;overflow:hidden}.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:fl 14s ease-in-out infinite;pointer-events:none}
+.o1{width:420px;height:420px;background:#4f46e5;top:-120px;left:-100px}.o2{width:360px;height:360px;background:#0891b2;right:-80px;top:120px;animation-delay:-5s}.o3{width:260px;height:260px;background:#8b5cf6;bottom:-80px;left:40%;animation-delay:-9s}
+@keyframes fl{50%{transform:translate(40px,-30px) scale(1.1)}}
+.hg{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative}
+.hero h1{font-size:clamp(40px,6.4vw,76px);letter-spacing:-.045em;margin:16px 0 20px}.hero p.sub{color:var(--mut);font-size:18px;max-width:540px}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--card);font-size:13px;color:var(--mut)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{padding:6px 13px;border-radius:99px;border:1px solid var(--bd);font-size:13px;color:var(--mut)}
+.dash{padding:18px;box-shadow:var(--sh)}.dh{display:flex;gap:6px;margin-bottom:14px}.dh i{width:10px;height:10px;border-radius:50%;background:#ff5f57}.dh i:nth-child(2){background:#febc2e}.dh i:nth-child(3){background:#28c840}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.kp div{padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--bd)}.kp small{color:var(--mut);font-size:11px}.kp b{display:block;font:700 20px Sora}
+.ch{margin:12px 0;padding:12px;border-radius:14px;border:1px solid var(--bd);background:var(--card)}.ch svg{width:100%;height:110px}
+.ln{stroke-dasharray:600;stroke-dashoffset:600;animation:dr 2.6s .4s forwards}@keyframes dr{to{stroke-dashoffset:0}}
+.bars{display:flex;align-items:flex-end;gap:7px;height:70px;margin-top:6px}.bars i{flex:1;border-radius:6px 6px 0 0;background:var(--grad);height:var(--h);transform-origin:bottom;animation:gr 1.2s both}@keyframes gr{from{transform:scaleY(0)}}
+.tr{display:flex;justify-content:space-between;padding:8px 4px;border-top:1px solid var(--bd);font-size:12px;color:var(--mut)}.tr b{color:var(--tx);font-weight:500}.ok{color:#34d399}
+@media(max-width:900px){.hg{grid-template-columns:1fr}}
+/* stats + marquee */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.st{padding:26px;text-align:center}.st b{font:800 clamp(30px,4vw,46px) Sora;display:block}.st span{color:var(--mut);font-size:14px}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.mq{overflow:hidden;margin-top:36px;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mt{display:flex;gap:12px;width:max-content;animation:mq 38s linear infinite}.mt span{padding:8px 18px;border:1px solid var(--bd);border-radius:99px;color:var(--mut);font-size:14px;background:var(--card)}@keyframes mq{to{transform:translateX(-50%)}}
+/* systems */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}.fc{padding:9px 18px;border-radius:99px;border:1px solid var(--bd);background:var(--card);font-size:14px;font-weight:500}.fc[aria-pressed=true]{background:var(--grad);color:#fff;border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.sc{padding:26px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,border-color .3s}.sc:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.6)}
+.sc.ft{border-color:transparent;background:linear-gradient(var(--bg2),var(--bg2)) padding-box,conic-gradient(from var(--a,0deg),#6366f1,#22d3ee,#D4AF37,#8b5cf6,#6366f1) border-box;animation:sp 6s linear infinite}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}@keyframes sp{to{--a:360deg}}
+.sc .ic{font-size:30px;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:var(--card);border:1px solid var(--bd)}
+.sc h3{font-size:19px}.sc p{color:var(--mut);font-size:14.5px}.sc ul{list-style:none;padding:0;font-size:14px;color:var(--mut);display:grid;gap:5px;flex:1}.sc li::before{content:"✓ ";color:var(--ac3)}
+.tg{display:flex;gap:6px;flex-wrap:wrap}.tg span{font-size:12px;padding:3px 10px;border-radius:99px;background:rgba(99,102,241,.16);color:var(--tx)}
+.ai{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:linear-gradient(120deg,var(--gold),#f3dc8a);color:#1a1400;margin-left:8px;vertical-align:middle}
+/* modal */
+.ov{position:fixed;inset:0;z-index:90;background:rgba(3,5,12,.75);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px}.ov.open{display:flex}
+.md{width:min(820px,100%);max-height:90vh;overflow:auto;padding:34px;background:var(--bg2);border:1px solid var(--bd);border-radius:26px;box-shadow:var(--sh);animation:pop .3s}@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.97)}}
+.md h3{font-size:28px;margin-bottom:6px}.md h4{margin:22px 0 8px;color:var(--gold);font-size:15px}.md ul{padding-left:0;list-style:none;display:flex;flex-wrap:wrap;gap:7px}.md li{padding:5px 12px;border-radius:99px;border:1px solid var(--bd);font-size:13.5px;background:var(--card)}
+.md p{color:var(--mut)}.x{position:sticky;top:0;float:right;width:40px;height:40px;border-radius:50%;border:1px solid var(--bd);background:var(--card)}.mk{margin:22px 0;padding:14px 18px;border-radius:14px;border:1px dashed var(--gold);color:var(--gold);font-size:14px}
+body.lock{overflow:hidden}
+/* ai */
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}.af{display:grid;grid-template-columns:1fr 1fr;gap:14px}.af div{padding:20px}.af b{font:600 16px Sora;display:block;margin:6px 0}.af span{color:var(--mut);font-size:14px}
+.chat{padding:20px;display:flex;flex-direction:column;gap:12px;min-height:440px}.cm{max-width:88%;padding:11px 15px;border-radius:16px;font-size:14.5px;animation:pop .3s}.cm.u{align-self:flex-end;background:var(--grad);color:#fff}.cm.b{background:var(--card);border:1px solid var(--bd)}
+.qs{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.qs button{padding:8px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--card);font-size:13px}.qs button:hover{border-color:var(--ac3)}
+.dots span{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--mut);animation:bn 1s infinite}.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}@keyframes bn{50%{transform:translateY(-5px)}}
+@media(max-width:900px){.ag,.af{grid-template-columns:1fr}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.bn{padding:24px}.bn.w{grid-column:span 2}.bn h3{font-size:17px;margin:8px 0 6px}.bn p{color:var(--mut);font-size:14px}.bn .e{font-size:26px}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}}@media(max-width:560px){.bento{grid-template-columns:1fr}.bn.w{grid-column:auto}}
+.resell{margin-top:20px;padding:22px 26px;text-align:center;border-color:var(--gold)}
+/* timeline */
+.tl{display:grid;gap:18px;position:relative;max-width:780px;margin:auto;padding-left:34px}.tl::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--grad)}
+.ts{padding:22px;position:relative}.ts::before{content:attr(data-n);position:absolute;left:-34px;top:20px;width:24px;height:24px;border-radius:50%;background:var(--grad);color:#fff;font:700 12px/24px Sora;text-align:center}.ts h3{font-size:18px}.ts p{color:var(--mut);font-size:14.5px}
+/* about */
+.about{padding:110px 0;clip-path:inset(0);isolation:isolate}
+.about::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(60% 50% at 15% 20%,rgba(99,102,241,.55),transparent 60%),radial-gradient(50% 50% at 85% 30%,rgba(34,211,238,.35),transparent 60%),radial-gradient(60% 60% at 50% 90%,rgba(139,92,246,.45),transparent 60%),#070a18}
+.ab{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;padding:44px;border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.05));backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.18);box-shadow:0 30px 80px rgba(0,0,0,.5);color:#eef0f8}
+.ph{perspective:800px;display:grid;place-items:center}.ring{padding:6px;border-radius:32px;background:conic-gradient(from var(--a,0deg),#6366f1,#22d3ee,#D4AF37,#8b5cf6,#6366f1);animation:sp 5s linear infinite;box-shadow:0 0 70px rgba(99,102,241,.5);transition:transform .15s;width:min(100%,340px)}
+.ring img,.ring svg{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:27px;background:#0c1020}
+.ab h3{font-size:clamp(28px,4vw,40px)}.role{color:#f0d77a;font-weight:600;margin:4px 0 14px}.ab p{color:#c9cfe6}
+.av{display:inline-flex;gap:9px;align-items:center;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:13px;margin-bottom:14px;color:#eef0f8}.av i{width:9px;height:9px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 #34d399;animation:pl 1.8s infinite}@keyframes pl{70%{box-shadow:0 0 0 10px transparent}}
+.sk{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.sk span{padding:5px 13px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:13px;color:#eef0f8}
+.ms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.ms div{padding:12px 8px;text-align:center;border-radius:14px;background:rgba(255,255,255,.08);font-size:12.5px;color:#c9cfe6}.ms b{display:block;font:700 18px Sora;color:#fff}
+@media(max-width:900px){.ab{grid-template-columns:1fr;padding:26px}.ms{grid-template-columns:1fr 1fr}}
+/* quote */
+.q{padding:46px;text-align:center;max-width:860px;margin:auto}.q h2{font-size:clamp(28px,4vw,42px)}.q p{color:var(--mut);margin:14px auto 26px;max-width:600px}.ni{margin-top:30px;text-align:left}.ni h4{color:var(--gold);margin-bottom:10px}.ni ul{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0}.ni li{padding:6px 14px;border:1px solid var(--bd);border-radius:99px;font-size:13.5px;color:var(--mut)}
+/* faq */
+.fq{max-width:820px;margin:auto;display:grid;gap:12px}.fi{padding:0}.fi button{width:100%;text-align:left;padding:20px 24px;background:none;border:0;font:600 16px Sora;display:flex;justify-content:space-between;gap:12px}.fi button::after{content:"+";font-size:22px;color:var(--ac3);transition:transform .3s}.fi button[aria-expanded=true]::after{transform:rotate(45deg)}
+.fa{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}.fa.open{grid-template-rows:1fr}.fa div{overflow:hidden;padding:0 24px;color:var(--mut);font-size:15px}.fa.open div{padding-bottom:20px}
+/* contact */
+.cg{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}.cf{padding:30px;display:grid;gap:14px}label{font-size:13px;color:var(--mut);display:grid;gap:6px}
+input,select,textarea{width:100%;padding:13px 15px;border-radius:13px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit}select option{background:var(--bg2);color:var(--tx)}
+.cs{padding:30px;display:flex;flex-direction:column;gap:14px;justify-content:center}@media(max-width:860px){.cg{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--bd);padding:56px 0 28px;background:var(--bg2)}.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}.fg h4{margin-bottom:12px;font-size:15px}.fg a,.fg li{display:block;color:var(--mut);font-size:14px;padding:3px 0}.fg ul{padding:0;list-style:none}.fg a:hover{color:var(--tx)}
+.so{display:flex;gap:10px;margin-top:14px}.cp{margin-top:36px;padding-top:20px;border-top:1px solid var(--bd);text-align:center;color:var(--mut);font-size:13px}@media(max-width:760px){.fg{grid-template-columns:1fr}}
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s;transition-delay:var(--d,0s)}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.ln{stroke-dashoffset:0}}
+</style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="nav" role="navigation" aria-label="Main">
-    <div class="nav-inner">
-      <a href="#" class="logo" aria-label="Solvers-Lance home">
-        <span class="logo-mark">SL</span>
-        <span>Solvers-Lance</span>
-      </a>
-      <div class="nav-links" id="navLinks">
-        <a href="#systems">Systems</a>
-        <a href="#ai-power">AI Power</a>
-        <a href="#marketing">Marketing Kit</a>
-        <a href="#process">Process</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme" title="Toggle theme">
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        </button>
-        <a href="#contact" class="btn btn-primary btn-sm">Get a Demo</a>
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-  <div class="mobile-menu" id="mobileMenu" role="menu">
-    <a href="#systems">Systems</a>
-    <a href="#ai-power">AI Power</a>
-    <a href="#marketing">Marketing Kit</a>
-    <a href="#process">Process</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact">Contact</a>
-    <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem">Get a Demo</a>
-  </div>
+<header><div class="wrap nav">
+<a href="#top" class="logo" aria-label="Solvers-Lance home"><span class="mono">SL</span>Solvers-Lance</a>
+<nav class="links" id="links" aria-label="Main">
+<a href="#systems">Systems</a><a href="#ai">AI Power</a><a href="#marketing">Marketing Kit</a><a href="#process">Process</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+<div class="nr"><button class="ib" id="theme" aria-label="Toggle theme">🌙</button><a class="btn p" data-wa="Assalam o Alaikum! I found Solvers-Lance online and would like to discuss a system.">WhatsApp Me</a><button class="ib burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button></div>
+</div></header>
 
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero-orbs" aria-hidden="true">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-    </div>
-    <div class="container hero-grid">
-      <div class="reveal">
-        <div class="hero-badge"><span></span> Laravel · MySQL · AI-Powered · Source Code Included</div>
-        <h1><span class="gradient-text">Management Systems<br />That Think.</span></h1>
-        <p class="hero-sub">Ready-to-launch management systems, powered by AI, built for Pakistani businesses. Aap ka business, hamari technology.</p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">Book Free Demo</a>
-          <a href="#systems" class="btn btn-ghost">View Systems</a>
-        </div>
-        <div class="trust-chips">
-          <span class="chip">Laravel</span>
-          <span class="chip">MySQL</span>
-          <span class="chip">AI-Powered</span>
-          <span class="chip gold">Source Code Included</span>
-        </div>
-      </div>
-      <div class="dash-mock reveal reveal-delay-2" aria-hidden="true">
-        <div class="dash-top">
-          <div class="dash-dots"><span></span><span></span><span></span></div>
-          <span class="dash-title">Installment Dashboard · Live</span>
-        </div>
-        <div class="dash-body">
-          <div class="dash-card">
-            <div class="dash-label">Today's Collection</div>
-            <div class="dash-value up">PKR 184,500</div>
-          </div>
-          <div class="dash-card">
-            <div class="dash-label">Active Plans</div>
-            <div class="dash-value">1,248</div>
-          </div>
-          <div class="dash-card wide">
-            <div class="dash-label">Weekly Trend</div>
-            <div class="dash-chart">
-              <span style="height:35%;animation-delay:0.1s"></span>
-              <span style="height:55%;animation-delay:0.2s"></span>
-              <span style="height:42%;animation-delay:0.3s"></span>
-              <span style="height:78%;animation-delay:0.4s"></span>
-              <span style="height:65%;animation-delay:0.5s"></span>
-              <span style="height:90%;animation-delay:0.6s"></span>
-              <span style="height:72%;animation-delay:0.7s"></span>
-            </div>
-          </div>
-          <div class="dash-card wide">
-            <div class="dash-row"><span>Defaulters (AI flagged)</span><span class="dash-pill amber">23</span></div>
-            <div class="dash-row"><span>Recovery rate</span><span class="dash-pill green">94.2%</span></div>
-            <div class="dash-row"><span>Next due batch</span><span style="color:var(--text-muted)">Tomorrow</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<main id="top">
+<section class="hero"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+<div class="wrap hg">
+<div><span class="pill">🇵🇰 Aap ka business, hamari technology</span>
+<h1>Management Systems <span class="gt">That Think.</span></h1>
+<p class="sub">Ready-to-launch management systems, powered by AI, built for Pakistani businesses. Launch in days, own the source code forever.</p>
+<div class="ctas"><a class="btn p" data-wa="Hi Muhammad Haris, I would like to book a free demo of your management systems.">Book Free Demo</a><a class="btn" href="#systems">View Systems</a></div>
+<div class="chips"><span>Laravel</span><span>MySQL</span><span>AI-Powered</span><span>Source Code Included</span></div></div>
+<div class="glass dash" aria-label="Dashboard preview"><div class="dh"><i></i><i></i><i></i></div>
+<div class="kp"><div><small>Today's Sales</small><b data-c="128">0</b></div><div><small>Collections</small><b data-c="86">0</b></div><div><small>AI Alerts</small><b data-c="7">0</b></div></div>
+<div class="ch"><svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><path class="ln" d="M0 90 C30 80 40 50 70 58 S120 90 150 52 S210 20 240 36 S280 10 300 8" fill="none" stroke="url(#lg)" stroke-width="3"/></svg>
+<div class="bars"><i style="--h:40%"></i><i style="--h:65%;animation-delay:.1s"></i><i style="--h:50%;animation-delay:.2s"></i><i style="--h:85%;animation-delay:.3s"></i><i style="--h:60%;animation-delay:.4s"></i><i style="--h:100%;animation-delay:.5s"></i><i style="--h:78%;animation-delay:.6s"></i></div></div>
+<div class="tr"><b>AI forecast: next month collection</b><span class="ok">▲ trending up</span></div>
+<div class="tr"><b>Low stock: 12 items need reorder</b><span class="ok">Auto PO ready</span></div></div>
+</div></section>
 
-  <!-- MARQUEE -->
-  <div class="marquee-wrap" aria-hidden="true">
-    <div class="marquee" id="marquee">
-      <span>School Management</span><span>Installment Systems</span><span>Jewellery Software</span><span>Pharmacy POS</span><span>Clinic / Hospital</span><span>Real Estate</span><span>Restaurant POS</span><span>Mobile Shop</span><span>HR & Payroll</span><span>Inventory</span><span>Laravel</span><span>MySQL</span><span>AI Insights</span><span>Source Code</span>
-      <span>School Management</span><span>Installment Systems</span><span>Jewellery Software</span><span>Pharmacy POS</span><span>Clinic / Hospital</span><span>Real Estate</span><span>Restaurant POS</span><span>Mobile Shop</span><span>HR & Payroll</span><span>Inventory</span><span>Laravel</span><span>MySQL</span><span>AI Insights</span><span>Source Code</span>
-    </div>
-  </div>
+<section style="padding:0 0 70px"><div class="wrap">
+<div class="stats">
+<div class="glass st rv"><b class="gt"><span data-c="10">0</span>+</b><span>Ready Systems</span></div>
+<div class="glass st rv" style="--d:.08s"><b class="gt">AI</b><span>Powered Modules</span></div>
+<div class="glass st rv" style="--d:.16s"><b class="gt"><span data-c="100">0</span>%</b><span>Source Code Delivered</span></div>
+<div class="glass st rv" style="--d:.24s"><b class="gt"><span data-c="15">0</span></b><span>Day Free Trial</span></div></div>
+<div class="mq" aria-hidden="true"><div class="mt" id="mq"></div></div>
+</div></section>
 
-  <!-- STATS -->
-  <section class="stats">
-    <div class="container stats-grid">
-      <div class="reveal">
-        <div class="stat-num" data-count="10">0</div>
-        <div class="stat-label">Ready Systems</div>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <div class="stat-num" data-count="6">0</div>
-        <div class="stat-label">AI-Powered Modules</div>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div class="stat-num" data-suffix="%">100</div>
-        <div class="stat-label">Source Code Delivered</div>
-      </div>
-      <div class="reveal reveal-delay-3">
-        <div class="stat-num" data-count="15">0</div>
-        <div class="stat-label">Day Free Trial</div>
-      </div>
-    </div>
-  </section>
+<section id="systems"><div class="wrap">
+<div class="sec-h rv"><span class="tag">Our Management Systems</span><h2>Ten systems, ready to <span class="gt">launch</span></h2><p>Pick the system that fits your business. Every one is built on Laravel + MySQL, customizable, and delivered with full source code.</p></div>
+<div class="filters" id="filters" role="group" aria-label="Filter systems"></div>
+<div class="grid" id="grid"></div>
+</div></section>
 
-  <!-- SYSTEMS -->
-  <section id="systems">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">Our Products</span>
-        <h2>Management Systems Built for Pakistan</h2>
-        <p>Ten production-ready systems. Filter by industry or AI capability. Every system ships with full source code and a marketing kit so you can sell from day one.</p>
-      </div>
-      <div class="filters reveal" role="group" aria-label="Filter systems">
-        <button class="filter-chip active" data-filter="all">All</button>
-        <button class="filter-chip" data-filter="ai">AI-Powered</button>
-        <button class="filter-chip" data-filter="retail">Retail</button>
-        <button class="filter-chip" data-filter="education">Education</button>
-        <button class="filter-chip" data-filter="health">Health</button>
-        <button class="filter-chip" data-filter="finance">Finance</button>
-        <button class="filter-chip" data-filter="property">Property</button>
-      </div>
-      <div class="systems-grid" id="systemsGrid"></div>
-    </div>
-  </section>
+<section id="ai" style="background:linear-gradient(180deg,transparent,var(--bg2),transparent)"><div class="wrap ag">
+<div><div class="sec-h rv"><span class="tag">AI Power</span><h2>Software that <span class="gt">answers back</span></h2><p>AI is built into the workflow, not bolted on. Ask questions in plain language and get decisions, not just data.</p></div>
+<div class="af">
+<div class="glass spot rv">💡<b>Smart insights</b><span>Spot trends and risks before they cost you money.</span></div>
+<div class="glass spot rv" style="--d:.08s">📈<b>Predictions</b><span>Forecast sales, collections, demand and defaults.</span></div>
+<div class="glass spot rv" style="--d:.16s">💬<b>Chat assistant</b><span>Ask your data in English or Roman Urdu.</span></div>
+<div class="glass spot rv" style="--d:.24s">📄<b>Auto-reports</b><span>Daily and monthly summaries written for you.</span></div>
+<div class="glass spot rv" style="--d:.32s">🔍<b>OCR</b><span>Read bills, CNICs and documents into forms.</span></div>
+<div class="glass spot rv" style="--d:.4s">🎯<b>Recommendations</b><span>Reorder, combo and follow-up suggestions.</span></div></div></div>
+<div class="glass chat rv" aria-live="polite"><b style="font-family:Sora">🤖 Solvers AI Assistant <small style="color:var(--mut);font-weight:400">(demo)</small></b>
+<div id="cl" style="display:flex;flex-direction:column;gap:12px"><div class="cm b">Salam! Ask me about your business. Try a question below.</div></div>
+<div class="qs" id="qs"></div></div>
+</div></section>
 
-  <!-- AI POWER -->
-  <section id="ai-power">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">Intelligence Layer</span>
-        <h2>AI Power Inside Every Decision</h2>
-        <p>Not bolted on. Embedded. Smart insights, predictions, chat assistants, auto-reports, OCR and recommendations that actually move the needle for Pakistani businesses.</p>
-      </div>
-      <div class="ai-grid">
-        <div class="ai-features reveal">
-          <div class="ai-feat">
-            <div class="ai-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
-            <div>
-              <h4>Smart Insights & Predictions</h4>
-              <p>Default-risk scoring, at-risk student alerts, demand forecasts, attrition prediction — before problems become losses.</p>
-            </div>
-          </div>
-          <div class="ai-feat">
-            <div class="ai-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></div>
-            <div>
-              <h4>Chat Assistant</h4>
-              <p>Natural-language queries: “Show defaulters of last 3 months” or parent chatbot answers — in Roman Urdu or English.</p>
-            </div>
-          </div>
-          <div class="ai-feat">
-            <div class="ai-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
-            <div>
-              <h4>Auto-Reports & OCR</h4>
-              <p>One-click progress summaries, discharge notes, collection reports. Optional OCR for receipts and documents.</p>
-            </div>
-          </div>
-          <div class="ai-feat">
-            <div class="ai-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-            <div>
-              <h4>Recommendations</h4>
-              <p>Substitute medicines, combo deals, reorder suggestions, price by market trend — actionable, not decorative.</p>
-            </div>
-          </div>
-        </div>
-        <div class="ai-chat reveal reveal-delay-2" aria-label="AI assistant demo">
-          <div class="ai-chat-header">
-            <div class="ai-avatar">AI</div>
-            <div>
-              <h4>Solvers Assistant</h4>
-              <span>● Online</span>
-            </div>
-          </div>
-          <div class="ai-messages" id="aiMessages">
-            <div class="msg bot">Assalam o Alaikum! Main aap ke business data se jawab de sakta hoon. Koi sawal poochhein.</div>
-          </div>
-          <div class="ai-suggestions" id="aiSuggestions">
-            <button class="ai-sug" data-q="Show defaulters of last 3 months">Show defaulters of last 3 months</button>
-            <button class="ai-sug" data-q="Which products are slow movers?">Which products are slow movers?</button>
-            <button class="ai-sug" data-q="Predict collection for next week">Predict collection for next week</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="marketing"><div class="wrap">
+<div class="sec-h rv"><span class="tag">Marketing Kit</span><h2>Every system ships with a <span class="gt">ready sales toolkit</span></h2><p>Start marketing and reselling on day one. Nothing to design, write or prepare.</p></div>
+<div class="bento" id="bento"></div>
+<div class="glass resell rv"><b style="font-family:Sora">Start marketing and reselling immediately.</b> <span style="color:var(--mut)">Brochures, scripts, templates and agreements are ready to send the moment your system goes live.</span></div>
+</div></section>
 
-  <!-- MARKETING KIT -->
-  <section id="marketing">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">Sell Ready</span>
-        <h2>Marketing Kit Included With Every System</h2>
-        <p>You don't just get software. You get a complete go-to-market pack so you (or your clients) can start selling immediately.</p>
-      </div>
-      <div class="bento reveal">
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
-          <h4>Product Brochure (PDF)</h4>
-          <p>Print-ready brochure with features, screenshots and pricing placeholders.</p>
-        </div>
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
-          <h4>Pitch Deck</h4>
-          <p>Clean slide deck for demos and client meetings.</p>
-        </div>
-        <div class="bento-item span-2">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div>
-          <h4>Demo Video Script</h4>
-          <p>Ready script to record a 3–5 minute walkthrough. Scene-by-scene with talking points for Pakistani audiences.</p>
-        </div>
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
-          <h4>WhatsApp Broadcast Templates</h4>
-          <p>Launch, follow-up and re-engagement messages in English + Roman Urdu.</p>
-        </div>
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
-          <h4>FB / IG Post Pack</h4>
-          <p>10 captions + creative ideas for organic and paid posts.</p>
-        </div>
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
-          <h4>Cold-Outreach Scripts</h4>
-          <p>Call + WhatsApp scripts for first contact and follow-ups.</p>
-        </div>
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
-          <h4>Pricing & Quotation Template</h4>
-          <p>Editable quote sheet with installment breakdown and terms.</p>
-        </div>
-        <div class="bento-item">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
-          <h4>Client Agreement Template</h4>
-          <p>Simple service agreement covering scope, payment and source-code delivery.</p>
-        </div>
-        <div class="bento-item span-2">
-          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div>
-          <h4>Landing-Page Copy + FAQ & Objection Sheet</h4>
-          <p>Headline, benefits, feature bullets and answers to the 12 most common objections Pakistani buyers raise.</p>
-        </div>
-      </div>
-      <p class="bento-note reveal"><strong>Resell-ready:</strong> Clients can market and resell these systems immediately using the included kit. No extra licensing fees on the kit itself.</p>
-    </div>
-  </section>
+<section id="process"><div class="wrap">
+<div class="sec-h rv" style="text-align:center;margin-inline:auto"><span class="tag">How We Work</span><h2>From call to <span class="gt">full ownership</span></h2></div>
+<div class="tl">
+<div class="glass ts rv" data-n="1"><h3>Requirement call</h3><p>We talk through your business, workflows and must-have features.</p></div>
+<div class="glass ts rv" data-n="2"><h3>Agreement + advance</h3><p>A clear written agreement with a milestone plan shared privately.</p></div>
+<div class="glass ts rv" data-n="3"><h3>Build + live demo</h3><p>You see working screens early and often, not at the very end.</p></div>
+<div class="glass ts rv" data-n="4"><h3>15-day free trial</h3><p>Use it in your real business. Free changes until you are satisfied.</p></div>
+<div class="glass ts rv" data-n="5"><h3>Final delivery</h3><p>Live access plus the complete source code, handed over to you.</p></div></div>
+</div></section>
 
-  <!-- PROCESS -->
-  <section id="process">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">How We Work</span>
-        <h2>Clear Process. Transparent Payments.</h2>
-        <p>No surprises. You see progress at every stage and keep full source code at the end.</p>
-      </div>
-      <div class="timeline reveal">
-        <div class="tl-item">
-          <div class="tl-dot"><span></span></div>
-          <div class="tl-step">Step 1</div>
-          <h4>Requirement Call</h4>
-          <p>Free discovery call. We map your modules, roles, reports and any must-have customizations. You leave with a clear scope.</p>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"><span></span></div>
-          <div class="tl-step">Step 2</div>
-          <h4>Agreement + 30% Advance</h4>
-          <p>Simple written agreement. 30% advance to lock the slot and start configuration of your chosen system.</p>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"><span></span></div>
-          <div class="tl-step">Step 3</div>
-          <h4>Build + Demo (35%)</h4>
-          <p>We configure, brand and demo the working system. Second 35% is due after you approve the demo.</p>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"><span></span></div>
-          <div class="tl-step">Step 4</div>
-          <h4>15-Day Free Trial</h4>
-          <p>You (or your client) use the system live. Free changes until you are satisfied within the agreed scope. No pressure.</p>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"><span></span></div>
-          <div class="tl-step">Step 5</div>
-          <h4>Final Payment (35%) + Live Access + Source Code</h4>
-          <p>Final 35% before handover. You receive full live access and complete source code. Ownership is yours.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="about" id="about"><div class="wrap">
+<div class="ab">
+<div class="ph"><div class="ring" id="ring">
+<!-- PHOTO: place your picture named haris.jpg next to index.html, or paste a base64 data URI in OWNER.photo -->
+<img id="ownerPhoto" src="haris.jpg" alt="Muhammad Haris - Founder of Solvers-Lance" width="340" height="425" loading="lazy"></div></div>
+<div><span class="av"><i></i>Available for new projects</span>
+<h3>Muhammad Haris</h3><div class="role">Founder &amp; Lead Developer, Solvers-Lance</div>
+<p>I am a Laravel + MySQL full-stack developer who builds AI-powered management systems for Pakistani businesses. From schools and clinics to jewellery shops and pharmacies, I turn daily paperwork into clean, fast software. Every project is delivered with live access and full source code, so you own what you pay for. You get one developer who answers your calls and fixes things quickly.</p>
+<div class="sk"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>REST APIs</span><span>AI Integration</span><span>JavaScript</span><span>Tailwind/CSS</span><span>System Design</span></div>
+<div class="ms"><div><b>10+</b>Systems Built</div><div><b>15-Day</b>Free Trial</div><div><b>Full</b>Source Code</div><div><b>Fast</b>Support</div></div>
+<p style="margin-bottom:16px"><a data-ph style="color:#f0d77a;font-weight:600"></a></p>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn p" data-wa="Hi Muhammad Haris, I saw your profile and would like to discuss a project.">Chat on WhatsApp</a><a class="btn" data-tel style="color:#fff;border-color:rgba(255,255,255,.3)">Call Now</a></div></div>
+</div></div></section>
 
-  <!-- PRICING -->
-  <section id="pricing">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">Transparent Pricing</span>
-        <h2>Simple Packages. No Hidden Fees.</h2>
-        <p>Example pricing for Installment Management System. Other systems start from the prices shown on their cards. Domain, hosting and extra integrations are separate.</p>
-      </div>
-      <div class="pricing-grid reveal">
-        <div class="price-card">
-          <div class="price-tier">Starter</div>
-          <div class="price-amount">PKR 45k<span>+</span></div>
-          <p class="price-desc">Single system, standard modules, no AI layer.</p>
-          <ul class="price-list">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Core modules only</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Admin + staff logins</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Basic reports</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Marketing kit included</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Full source code</li>
-          </ul>
-          <a href="#contact" class="btn btn-ghost btn-full">Request Quote</a>
-        </div>
-        <div class="price-card featured">
-          <div class="price-tier">Professional</div>
-          <div class="price-amount">PKR 60,000</div>
-          <p class="price-desc">Installment Management System — full AI suite. 30% / 35% / 35% payment plan.</p>
-          <ul class="price-list">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> All core + AI modules</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Default-risk scoring & forecasts</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Natural-language reports</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> 15-day free trial</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Marketing kit + source code</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary btn-full">Book Demo — Installment</a>
-        </div>
-        <div class="price-card">
-          <div class="price-tier">Custom AI</div>
-          <div class="price-amount">Custom</div>
-          <p class="price-desc">Multi-branch, mobile app, deep AI or industry-specific workflows.</p>
-          <ul class="price-list">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Everything in Professional</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Custom modules & integrations</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Multi-branch / multi-company</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Dedicated support window</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Priority delivery slot</li>
-          </ul>
-          <a href="#contact" class="btn btn-ghost btn-full">Discuss Custom</a>
-        </div>
-      </div>
-      <div class="price-note reveal">
-        <strong>Not included (charged separately):</strong> Domain & hosting, SMS / WhatsApp Business API integration, native mobile app, multi-branch setup, and any feature outside the agreed list. Free bug-fix support for a limited period after delivery; thereafter annual maintenance is available.
-      </div>
-    </div>
-  </section>
+<section id="quote"><div class="wrap"><div class="glass q rv">
+<span class="tag">Get a Custom Quote</span><h2>Every project is quoted on <span class="gt">your requirements</span></h2>
+<p>No fixed packages. Tell us what your business needs and we reply with a clear quote on WhatsApp.</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn p" style="font-size:18px;padding:16px 34px" data-wa="Hi Muhammad Haris, I would like a custom quote for my business.">Get a Custom Quote</a><a class="btn" data-tel>Call 03102536233</a></div>
+<div class="ni"><h4>Not included unless agreed</h4><ul><li>Domain &amp; hosting (in client's name)</li><li>SMS / WhatsApp integration</li><li>Mobile app</li><li>Multi-branch</li><li>Any new feature outside the agreed list</li></ul></div>
+</div></div></section>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">FAQ</span>
-        <h2>Questions We Hear Most</h2>
-        <p>Straight answers. No marketing fog.</p>
-      </div>
-      <div class="faq-list reveal" id="faqList">
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">How long does delivery take? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">Most standard systems are configured and demo-ready within 7–14 days after the advance and scope lock. Heavily customized or multi-branch setups take longer; we confirm the timeline on the requirement call.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Do I own the source code? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">Yes. After final payment you receive the complete source code. You can host it anywhere, modify it, or hire another developer. No lock-in.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">What about hosting and domain? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">Domain and hosting are not included. We can recommend reliable Pakistani or international providers and help with deployment as a paid add-on if needed.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Can you customize modules? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">Yes. Small adjustments within the agreed list are free during the trial. New features or major changes are quoted separately before work starts.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">Which systems include AI? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">School, Installment, Clinic/Hospital and HR systems ship with AI features by default. Jewellery, Inventory, Pharmacy, Real Estate, Restaurant and Mobile Shop have optional AI modules that can be added.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">What is the payment plan? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">Standard split: 30% advance, 35% after demo approval, 35% before final delivery and source-code handover. We accept bank transfer and common Pakistani payment methods.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">How does the 15-day free trial work? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">After the demo you get a fully working environment for 15 days. You can request free changes within the original scope until you are satisfied. The trial ends when you accept or when the 15 days finish.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">What support do you provide after delivery? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
-          <div class="faq-a">Free bug-fix support for a limited period after handover. After that, annual maintenance packages are available for updates, server help and minor enhancements.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="faq"><div class="wrap"><div class="sec-h rv" style="text-align:center;margin-inline:auto"><span class="tag">FAQ</span><h2>Questions, <span class="gt">answered</span></h2></div><div class="fq" id="fq"></div></div></section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="cta-banner reveal">
-        <div>
-          <h2>Ready to Launch Your System?</h2>
-          <p>Book a free demo. Tell us which system fits your business — or your clients’ — and we’ll show it live. Aap ka business, hamari technology.</p>
-          <p style="font-size:0.9rem;color:var(--text-dim)">Or message us directly on WhatsApp for the fastest response.</p>
-          <a href="#" id="directWhatsApp" class="btn btn-gold" style="margin-top:0.75rem">Chat on WhatsApp</a>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="cf-name">Your Name</label>
-              <input type="text" id="cf-name" name="name" required placeholder="Full name" autocomplete="name" />
-            </div>
-            <div class="form-group">
-              <label for="cf-phone">Phone / WhatsApp</label>
-              <input type="tel" id="cf-phone" name="phone" required placeholder="03XX XXXXXXX" autocomplete="tel" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="cf-type">Business Type</label>
-            <select id="cf-type" name="type" required>
-              <option value="">Select…</option>
-              <option>School / Education</option>
-              <option>Installment / Finance</option>
-              <option>Jewellery</option>
-              <option>Retail / Inventory</option>
-              <option>Pharmacy</option>
-              <option>Clinic / Hospital</option>
-              <option>Real Estate</option>
-              <option>Restaurant</option>
-              <option>Mobile Shop</option>
-              <option>HR / Corporate</option>
-              <option>Reseller / Reseller</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="cf-msg">Message</label>
-            <textarea id="cf-msg" name="message" placeholder="Which system are you interested in? Any specific requirements?"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">Send via WhatsApp</button>
-        </form>
-      </div>
-    </div>
-  </section>
+<section id="contact"><div class="wrap">
+<div class="sec-h rv"><span class="tag">Contact</span><h2>Tell us about your <span class="gt">business</span></h2><p>Fill this in and WhatsApp opens with your message ready to send.</p></div>
+<div class="cg">
+<form class="glass cf" id="form"><label>Name<input id="fn" required autocomplete="name"></label><label>Phone<input id="fp" type="tel" required autocomplete="tel"></label>
+<label>Business type<select id="ft"><option>School / Academy</option><option>Installment Business</option><option>Jewellery Shop</option><option>Store / Inventory</option><option>Pharmacy</option><option>Clinic / Hospital</option><option>Real Estate</option><option>Restaurant</option><option>Mobile Shop</option><option>HR / Company</option><option>Other</option></select></label>
+<label>Message<textarea id="fm" rows="4" required></textarea></label><button class="btn p" type="submit" style="justify-content:center">Send on WhatsApp</button></form>
+<div class="glass cs"><h3>Prefer to talk?</h3><p style="color:var(--mut)">Call or message Muhammad Haris directly.</p><a class="btn p" data-wa="Hi Muhammad Haris, I have a question about your systems.">WhatsApp</a><a class="btn" data-tel>Call 03102536233</a><p style="color:var(--mut);font-size:14px" id="ci"></p></div>
+</div></div></section>
+</main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <a href="#" class="logo"><span class="logo-mark">SL</span><span>Solvers-Lance</span></a>
-          <p>Ready-to-launch management systems, powered by AI, built for Pakistani businesses. Laravel + MySQL. Full source code.</p>
-          <div class="socials">
-            <a href="#" aria-label="Facebook" id="socialFb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-            <a href="#" aria-label="Instagram" id="socialIg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="#" aria-label="LinkedIn" id="socialLi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h5>Quick Links</h5>
-          <a href="#systems">Systems</a>
-          <a href="#ai-power">AI Power</a>
-          <a href="#marketing">Marketing Kit</a>
-          <a href="#process">Process</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h5>Systems</h5>
-          <a href="#systems">School Management</a>
-          <a href="#systems">Installment System</a>
-          <a href="#systems">Jewellery</a>
-          <a href="#systems">Inventory</a>
-          <a href="#systems">Pharmacy</a>
-          <a href="#systems">Clinic / Hospital</a>
-        </div>
-        <div class="footer-col">
-          <h5>Contact</h5>
-          <a href="#" id="footerPhone">[Phone / WhatsApp]</a>
-          <a href="#" id="footerEmail">[Email]</a>
-          <a href="#">[City], Pakistan</a>
-          <a href="#">[Your Name]</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Solvers-Lance. All rights reserved.</span>
-        <span>Built with Laravel · MySQL · AI</span>
-      </div>
-    </div>
-  </footer>
+<footer><div class="wrap"><div class="fg">
+<div><a href="#top" class="logo"><span class="mono">SL</span>Solvers-Lance</a><p style="color:var(--mut);font-size:14px;margin-top:12px;max-width:340px">Ready-to-launch management systems, powered by AI, built for Pakistani businesses.</p>
+<div class="so"><a class="ib" href="#" aria-label="Facebook" data-s="facebook">f</a><a class="ib" href="#" aria-label="Instagram" data-s="instagram">in</a><a class="ib" href="#" aria-label="LinkedIn" data-s="linkedin">li</a><a class="ib" href="#" aria-label="GitHub" data-s="github">gh</a></div></div>
+<div><h4>Quick links</h4><a href="#systems">Systems</a><a href="#ai">AI Power</a><a href="#marketing">Marketing Kit</a><a href="#process">Process</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></div>
+<div><h4>Systems</h4><ul id="fl"></ul></div></div>
+<div class="cp">© 2026 Solvers-Lance | Muhammad Haris | 03102536233</div></div></footer>
 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <div>
-          <h3 id="modalTitle"></h3>
-          <div id="modalBadges" style="margin-top:0.4rem;display:flex;gap:0.4rem;flex-wrap:wrap"></div>
-        </div>
-        <button class="modal-close" id="modalClose" aria-label="Close modal">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-primary" id="modalWhatsApp">Request Demo on WhatsApp</a>
-        <button class="btn btn-ghost" id="modalClose2">Close</button>
-      </div>
-    </div>
-  </div>
+<div class="ov" id="ov"><div class="md" id="md" role="dialog" aria-modal="true" aria-labelledby="mt"></div></div>
 
-  <script>
-  /* ============================================================
-     CONFIG — Edit these values only. Everything else reads from here.
-     ============================================================ */
-  const CONFIG = {
-    name: "[Your Name]",
-    phone: "92XXXXXXXXXX",          // WhatsApp number without + or spaces
-    email: "[Email]",
-    city: "[City]",
-    whatsappMessage: "Assalam o Alaikum! I am interested in Solvers-Lance management systems. Please share more details.",
-    social: {
-      facebook: "#",
-      instagram: "#",
-      linkedin: "#"
-    },
-    prices: {
-      school: "Starting from PKR 75,000",
-      installment: "PKR 60,000",
-      jewellery: "Starting from PKR 80,000",
-      inventory: "Starting from PKR 55,000",
-      pharmacy: "Starting from PKR 65,000",
-      clinic: "Starting from PKR 90,000",
-      realestate: "Starting from PKR 70,000",
-      restaurant: "Starting from PKR 60,000",
-      mobileshop: "Starting from PKR 55,000",
-      hr: "Starting from PKR 70,000"
-    }
-  };
+<script>
+/* ============ CONFIG: edit your details here ============ */
+const OWNER = { name:"Muhammad Haris", phone:"03102536233", whatsapp:"923102536233",
+  photo:"haris.jpg", /* put your picture as haris.jpg next to index.html, or paste a base64 data URI */
+  email:"", city:"", socials:{ facebook:"", instagram:"", linkedin:"", github:"" } };
+/* ========================================================== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const wa=t=>`https://wa.me/${OWNER.whatsapp}?text=${encodeURIComponent(t)}`;
+const sp=s=>s.split("|");
 
-  /* ============================================================
-     SYSTEMS DATA
-     ============================================================ */
-  const SYSTEMS = [
-    {
-      id: "school",
-      name: "School Management System",
-      ai: true,
-      filters: ["ai", "education"],
-      pitch: "Complete academic & administrative control with AI that predicts performance and writes report-card remarks.",
-      features: ["Student admission & parent portal", "Attendance (manual + QR)", "Fee structure, vouchers & defaulter tracking", "Exams, results & AI report-card remarks", "Timetable generator, library & transport"],
-      tags: ["Laravel", "MySQL", "AI"],
-      priceKey: "school",
-      icon: "school",
-      overview: "A full-stack school ERP designed for Pakistani private schools and academies. From admission to alumni, every module is connected so principals, teachers, accountants and parents work from one source of truth.",
-      modules: ["Student admission & enrollment", "Class / section / subject setup", "Attendance (manual entry + QR)", "Fee structure, vouchers & receipts", "Exams, results & report cards", "Timetable management", "Teacher records & payroll", "Parent portal", "Library", "Transport", "Notices & circulars"],
-      aiFeatures: ["Automatic report-card remarks", "Student performance prediction & at-risk alerts", "AI timetable generator", "Fee-defaulter prediction", "Parent chatbot", "Auto-generated progress summaries"],
-      who: "Private schools, academies, coaching centres and small college campuses that need one system for academics, fees and communication.",
-      reports: ["Daily/monthly attendance", "Fee collection & outstanding", "Class-wise result analysis", "Teacher workload", "Transport occupancy", "At-risk student lists"],
-      roles: ["Admin", "Principal", "Teacher", "Accountant", "Parent", "Student"]
-    },
-    {
-      id: "installment",
-      name: "Installment Management System",
-      ai: true,
-      filters: ["ai", "finance"],
-      pitch: "Customer plans, auto schedules, collection & AI default-risk scoring — built for Pakistani installment businesses.",
-      features: ["Customer & guarantor records", "Auto installment schedules", "Payment entry & receipt print", "Due / defaulter lists", "Daily & monthly collection reports"],
-      tags: ["Laravel", "MySQL", "AI"],
-      priceKey: "installment",
-      featured: true,
-      icon: "installment",
-      overview: "Purpose-built for shops and companies that sell on installment. Track every customer, guarantor, plan and payment. AI flags high-risk accounts and forecasts collection so you act before defaults pile up.",
-      modules: ["Customer & guarantor records", "Installment plans (advance, monthly, duration) with auto schedule", "Payment entry & receipt printing", "Due and defaulter lists", "Remaining balance view", "Daily & monthly collection reports", "Admin & staff login"],
-      aiFeatures: ["Default-risk scoring per customer", "Smart recovery reminders (WhatsApp-ready text)", "Collection forecasting", "Anomaly detection on payments", "Natural-language reports (“Show defaulters of last 3 months”)"],
-      who: "Electronics, furniture, mobile and appliance dealers, and any business that runs installment or committee plans.",
-      reports: ["Daily collection", "Monthly recovery vs target", "Defaulter aging", "Staff-wise collection", "AI risk scores"],
-      roles: ["Admin", "Staff / Collector"]
-    },
-    {
-      id: "jewellery",
-      name: "Jewellery Management System",
-      ai: false,
-      filters: ["retail"],
-      pitch: "Gold, silver, diamond stock by tola/gram, live rates, karigar ledger, barcodes and profit per item.",
-      features: ["Stock by tola / gram / ratti / masha", "Live daily gold-rate setting", "Karigar issue/receive ledger", "Old-gold exchange & barcodes", "Installment / committee sales"],
-      tags: ["Laravel", "MySQL"],
-      priceKey: "jewellery",
-      icon: "jewellery",
-      overview: "Built for Pakistani jewellers who need precise stock in traditional units, live rate application, artisan tracking and clean customer ledgers — without spreadsheets.",
-      modules: ["Gold / silver / diamond stock by tola, gram, ratti, masha", "Live daily gold-rate setting", "Karat & purity management", "Making charges & wastage", "Item tagging with barcodes", "Karigar (artisan) issue/receive ledger", "Old-gold exchange", "Customer ledger & advance bookings", "Installment / committee sales", "Estimate & invoice printing", "Profit per item", "Locker / safe stock audit"],
-      aiFeatures: ["Optional: price suggestion by market trend", "Design / category demand insights", "Stock-aging alerts"],
-      who: "Gold and diamond jewellers, wholesale and retail showrooms across Pakistan.",
-      reports: ["Stock valuation at current rate", "Karigar balance", "Sales & profit by item", "Old-gold intake", "Locker audit"],
-      roles: ["Admin", "Sales", "Stock Manager"]
-    },
-    {
-      id: "inventory",
-      name: "Stock / Inventory Management System",
-      ai: false,
-      filters: ["retail"],
-      pitch: "Multi-product catalog, purchase & sales, barcodes, low-stock alerts and AI demand forecasting when enabled.",
-      features: ["Multi-product catalog with variants", "Purchase & sales + ledgers", "Barcode & low-stock alerts", "Stock transfer & returns", "Profit & loss + tax invoices"],
-      tags: ["Laravel", "MySQL"],
-      priceKey: "inventory",
-      icon: "inventory",
-      overview: "A flexible inventory and trading system for wholesalers and retailers who need accurate stock, supplier/customer ledgers and clear profit visibility.",
-      modules: ["Multi-product catalog with variants", "Purchase & sales", "Supplier & customer ledgers", "Barcode support", "Low-stock alerts", "Stock transfer", "Damage / returns", "Batch & expiry (optional)", "Profit & loss", "Tax invoices", "Role-based access"],
-      aiFeatures: ["Demand forecasting", "Auto reorder suggestions", "Dead-stock detection", "ABC analysis", "Chat-style stock queries"],
-      who: "Wholesale traders, general stores, distributors and any multi-product retail business.",
-      reports: ["Stock valuation", "Fast / slow movers", "Purchase vs sales", "Profit by product", "Supplier dues"],
-      roles: ["Admin", "Purchase", "Sales", "Storekeeper"]
-    },
-    {
-      id: "pharmacy",
-      name: "Pharmacy / Medical Store Management System",
-      ai: false,
-      filters: ["health", "retail"],
-      pitch: "Batch & expiry control, salt/generic substitution, POS and controlled-drug register for medical stores.",
-      features: ["Medicine catalog with batch & expiry", "Salt / generic substitution", "POS purchase & sales", "Controlled-drug register", "Supplier dues & expiry claims"],
-      tags: ["Laravel", "MySQL"],
-      priceKey: "pharmacy",
-      icon: "pharmacy",
-      overview: "Compliant-friendly pharmacy software focused on expiry risk, substitution suggestions and fast counter sales common in Pakistani medical stores.",
-      modules: ["Medicine catalog with batch & expiry", "Salt / generic substitution", "Purchase & sales POS", "Controlled-drug register", "Supplier dues", "Return / expiry claims", "Customer history", "Daily sales and profit"],
-      aiFeatures: ["Expiry-risk alerts", "Smart substitute suggestions", "Fast / slow mover prediction", "Auto purchase orders"],
-      who: "Medical stores, pharmacies and small wholesale medical distributors.",
-      reports: ["Near-expiry stock", "Daily sales & profit", "Controlled-drug log", "Supplier outstanding", "Top-selling salts"],
-      roles: ["Admin", "Pharmacist", "Cashier"]
-    },
-    {
-      id: "clinic",
-      name: "Clinic / Hospital Management System",
-      ai: true,
-      filters: ["ai", "health"],
-      pitch: "OPD/IPD, appointments, prescriptions, lab orders and AI that drafts notes and predicts no-shows.",
-      features: ["Patient registration & appointments", "OPD / IPD & doctor schedules", "Prescriptions & lab orders", "Billing & insurance", "Medical history & reports"],
-      tags: ["Laravel", "MySQL", "AI"],
-      priceKey: "clinic",
-      icon: "clinic",
-      overview: "End-to-end clinic and small hospital system that reduces paperwork for doctors and front-desk staff while giving management clear revenue and occupancy views.",
-      modules: ["Patient registration", "Appointments & token queue", "Doctor schedules", "OPD / IPD", "Prescriptions", "Lab & radiology orders", "Pharmacy link", "Billing & insurance", "Medical history", "Reports"],
-      aiFeatures: ["Symptom-to-summary note drafting for doctors", "Appointment no-show prediction", "Auto-generated discharge summaries", "Voice-to-prescription (optional)"],
-      who: "Private clinics, polyclinics and small hospitals that want paperless OPD and connected billing.",
-      reports: ["Daily OPD count", "Revenue by service", "Doctor-wise load", "No-show rate", "Outstanding bills"],
-      roles: ["Admin", "Doctor", "Reception", "Lab", "Pharmacy", "Accountant"]
-    },
-    {
-      id: "realestate",
-      name: "Real Estate / Property Management System",
-      ai: false,
-      filters: ["property", "finance"],
-      pitch: "Plots, bookings, installment plans, agent commissions, rent collection and document vault in one place.",
-      features: ["Property & plot inventory", "Booking & installment plans", "Client & agent ledgers", "Commission tracking", "Rent collection & maintenance"],
-      tags: ["Laravel", "MySQL"],
-      priceKey: "realestate",
-      icon: "realestate",
-      overview: "Built for Pakistani developers, dealers and property managers who run plot sales on installment and also manage rental portfolios.",
-      modules: ["Property & plot inventory", "Booking & installment plans", "Client & agent / dealer ledgers", "Commission tracking", "Rent collection", "Tenant agreements", "Maintenance tickets", "Document vault", "Lead pipeline"],
-      aiFeatures: ["Lead scoring", "Price estimation", "Auto-follow-up messages", "Collection forecasting"],
-      who: "Housing societies, property dealers, builders and rental management companies.",
-      reports: ["Booking pipeline", "Installment recovery", "Commission payable", "Rent outstanding", "Lead conversion"],
-      roles: ["Admin", "Sales", "Accounts", "Agent"]
-    },
-    {
-      id: "restaurant",
-      name: "Restaurant POS & Management System",
-      ai: false,
-      filters: ["retail"],
-      pitch: "Dine-in, takeaway, delivery, kitchen display, recipe inventory and peak-hour insights for restaurants.",
-      features: ["Dine-in / takeaway / delivery POS", "Table management & KDS", "Recipe-based inventory", "Split bills & multi-printer", "Waiter / rider tracking"],
-      tags: ["Laravel", "MySQL"],
-      priceKey: "restaurant",
-      icon: "restaurant",
-      overview: "Fast POS with kitchen display and recipe-level stock so restaurants stop guessing food cost and never miss an order ticket.",
-      modules: ["Dine-in / takeaway / delivery POS", "Table management", "Kitchen display (KDS)", "Recipe-based inventory", "Menu & deals", "Split bills", "Waiter / rider tracking", "Daily closing", "Multi-printer support"],
-      aiFeatures: ["Best-seller & combo recommendations", "Peak-hour prediction", "Wastage insights", "Dynamic menu pricing suggestions"],
-      who: "Cafés, restaurants, cloud kitchens and multi-outlet food businesses.",
-      reports: ["Daily sales by channel", "Item-wise profit", "Wastage", "Staff performance", "Peak hours"],
-      roles: ["Admin", "Cashier", "Kitchen", "Waiter", "Manager"]
-    },
-    {
-      id: "mobileshop",
-      name: "Mobile Shop & Repair Management System",
-      ai: false,
-      filters: ["retail"],
-      pitch: "IMEI tracking, sales, repair job cards, parts inventory, warranty and installment sales for mobile shops.",
-      features: ["IMEI stock tracking", "Sales & purchase", "Repair job cards & status", "Parts inventory & warranty", "Installment sales & cash book"],
-      tags: ["Laravel", "MySQL"],
-      priceKey: "mobileshop",
-      icon: "mobile",
-      overview: "Everything a Pakistani mobile shop needs: sell phones and accessories with IMEI history, run repairs with status updates, and track dues and warranty in one system.",
-      modules: ["Mobile / accessory stock with IMEI tracking", "Sales & purchase", "Repair job cards with status & technician assignment", "Parts inventory", "Customer dues", "Warranty tracking", "Installment sales", "Daily cash book"],
-      aiFeatures: ["Repair-time estimation", "Fault-pattern insights", "Auto status-update messages to customers"],
-      who: "Mobile retailers, authorized dealers and repair centres.",
-      reports: ["IMEI history", "Repair turnaround", "Parts consumption", "Daily cash", "Warranty claims"],
-      roles: ["Admin", "Sales", "Technician"]
-    },
-    {
-      id: "hr",
-      name: "HR, Payroll & Attendance Management System",
-      ai: true,
-      filters: ["ai"],
-      pitch: "Biometric/QR/GPS attendance, Pakistani tax & EOBI-ready payroll, leaves and AI attrition-risk alerts.",
-      features: ["Employee records & attendance", "Shifts, overtime & leaves", "Salary, advance & tax/EOBI", "Payslips & performance", "Recruitment pipeline"],
-      tags: ["Laravel", "MySQL", "AI"],
-      priceKey: "hr",
-      icon: "hr",
-      overview: "HR and payroll tailored for Pakistani compliance (tax, EOBI, PESSI) with modern attendance methods and AI that flags attrition risk and payroll anomalies.",
-      modules: ["Employee records", "Attendance (biometric / QR / GPS)", "Shifts & overtime", "Leaves", "Salary & advance / loan", "Tax & EOBI / PESSI-ready deductions", "Payslips", "Performance reviews", "Recruitment pipeline", "Asset assignment"],
-      aiFeatures: ["Attrition-risk prediction", "Auto payroll anomaly checks", "Resume screening / ranking", "HR policy chatbot for employees"],
-      who: "SMEs and mid-size companies that need compliant payroll and cleaner HR operations without enterprise complexity.",
-      reports: ["Attendance summary", "Payroll register", "Leave balance", "Attrition risk list", "Recruitment funnel"],
-      roles: ["Admin", "HR", "Manager", "Employee"]
-    }
-  ];
+/* SYSTEMS DATA: m = modules, a = AI features (| separated) */
+const SYS=[
+{n:"School Management System",i:"🎓",c:["Education"],ai:1,p:"Run admissions, fees, exams and parents from one smart portal.",t:["Laravel","MySQL","AI"],
+ m:"Student admission|Class, section & subject setup|Attendance (manual + QR)|Fee structure & vouchers|Exams, results & report cards|Timetable|Teacher & payroll|Parent portal|Library|Transport|Notices",
+ a:"Automatic report-card remarks|Performance prediction & at-risk alerts|AI timetable generator|Fee-defaulter prediction|Parent chatbot|Auto-generated progress summaries",
+ w:"Schools, academies, colleges and coaching centres that want fewer registers and happier parents.",r:"Fee collection, defaulters, attendance, result sheets, payroll, class-wise performance",l:"Admin|Principal|Teacher|Accountant|Parent|Student"},
+{n:"Installment Management System",i:"💳",c:["Finance"],ai:1,p:"Track every installment, guarantor and recovery without a single missed due date.",t:["Laravel","MySQL","AI"],
+ m:"Customer & guarantor records|Installment plans (advance, monthly, duration) with auto schedule|Payment entry & receipt print|Due & defaulter list|Remaining balance|Daily & monthly collection reports|Admin & staff login",
+ a:"Default-risk scoring per customer|Smart recovery reminders (WhatsApp-ready text)|Collection forecasting|Anomaly detection on payments|Natural-language reports (\"Show defaulters of last 3 months\")",
+ w:"Showrooms, electronics and furniture dealers, motorcycle and appliance sellers who sell on installments.",r:"Daily collection, monthly collection, defaulters, remaining balance, customer statements",l:"Admin|Staff"},
+{n:"Jewellery Management System",i:"💎",c:["Retail"],ai:0,p:"Gold, silver and diamond stock by tola, gram, ratti and masha, with karigar ledgers.",t:["Laravel","MySQL","Barcode"],
+ m:"Gold/silver/diamond stock (tola/gram/ratti/masha)|Daily gold-rate setting|Karat & purity|Making charges & wastage|Item tagging with barcodes|Karigar issue/receive ledger|Old-gold exchange|Customer ledger & advance bookings|Installment/committee sales|Estimate & invoice printing|Profit per item|Locker/safe stock audit",
+ a:"Price suggestion by market trend|Design/category demand insights|Stock-aging alerts",
+ w:"Jewellery shops, goldsmiths and showrooms managing stock, karigars and customer accounts.",r:"Stock by karat, daily sales, profit per item, karigar balances, customer ledgers, locker audit",l:"Owner|Manager|Salesman|Accountant"},
+{n:"Stock / Inventory Management System",i:"📦",c:["Retail"],ai:0,p:"Know what you have, what is selling and what to reorder before it runs out.",t:["Laravel","MySQL","Barcode"],
+ m:"Product catalog with variants|Purchase & sales|Supplier & customer ledgers|Barcode|Low-stock alerts|Stock transfer|Damage & returns|Batch & expiry (optional)|Profit & loss|Tax invoices|Role-based access",
+ a:"Demand forecasting|Auto reorder suggestions|Dead-stock detection|ABC analysis|Chat-style stock queries",
+ w:"Wholesalers, distributors, general stores and any shop with a lot of products.",r:"Stock valuation, profit & loss, supplier dues, fast and slow movers, tax reports",l:"Admin|Manager|Cashier|Storekeeper"},
+{n:"Pharmacy / Medical Store System",i:"💊",c:["Retail","Health"],ai:0,p:"Batch, expiry and salt-wise substitution built into a fast POS.",t:["Laravel","MySQL","POS"],
+ m:"Medicine catalog with batch & expiry|Salt/generic substitution|Purchase & sales POS|Controlled-drug register|Supplier dues|Return & expiry claims|Customer history|Daily sales and profit",
+ a:"Expiry-risk alerts|Smart substitute suggestions|Fast/slow mover prediction|Auto purchase orders",
+ w:"Pharmacies, medical stores and distributors who must watch expiry and controlled drugs.",r:"Expiry report, daily sales, profit, supplier dues, controlled-drug register",l:"Owner|Pharmacist|Cashier"},
+{n:"Clinic / Hospital Management System",i:"🏥",c:["Health"],ai:1,p:"From token to discharge summary, with AI doing the paperwork for doctors.",t:["Laravel","MySQL","AI"],
+ m:"Patient registration|Appointments & token queue|Doctor schedules|OPD/IPD|Prescriptions|Lab & radiology orders|Pharmacy link|Billing & insurance|Medical history|Reports",
+ a:"Symptom-to-summary note drafting for doctors|Appointment no-show prediction|Auto-generated discharge summaries|Voice-to-prescription (optional)",
+ w:"Clinics, hospitals, diagnostic labs and doctors who want a smooth patient flow.",r:"Daily OPD, revenue by doctor, lab reports, billing, patient history",l:"Admin|Doctor|Receptionist|Lab|Pharmacist|Accountant"},
+{n:"Real Estate / Property System",i:"🏢",c:["Property"],ai:0,p:"Plots, bookings, installments, dealers and rent in one place.",t:["Laravel","MySQL","CRM"],
+ m:"Property & plot inventory|Booking & installment plans|Client & agent/dealer ledgers|Commission tracking|Rent collection|Tenant agreements|Maintenance tickets|Document vault|Lead pipeline",
+ a:"Lead scoring|Price estimation|Auto-follow-up messages|Collection forecasting",
+ w:"Developers, estate agents, housing societies and property managers.",r:"Booking status, installment recovery, commissions, rent due, lead conversion",l:"Admin|Sales Manager|Agent|Accountant"},
+{n:"Restaurant POS & Management",i:"🍽️",c:["Retail"],ai:0,p:"Dine-in, takeaway and delivery with a live kitchen display.",t:["Laravel","MySQL","KDS"],
+ m:"Dine-in/takeaway/delivery POS|Table management|Kitchen display (KDS)|Recipe-based inventory|Menu & deals|Split bills|Waiter/rider tracking|Daily closing|Multi-printer support",
+ a:"Best-seller & combo recommendations|Peak-hour prediction|Wastage insights|Dynamic menu pricing suggestions",
+ w:"Restaurants, cafes, fast-food outlets and cloud kitchens.",r:"Daily closing, item-wise sales, recipe costing, wastage, waiter and rider performance",l:"Owner|Manager|Cashier|Kitchen|Waiter"},
+{n:"Mobile Shop & Repair System",i:"📱",c:["Retail"],ai:0,p:"IMEI-tracked stock plus repair job cards your customers can follow.",t:["Laravel","MySQL","IMEI"],
+ m:"Mobile/accessory stock with IMEI tracking|Sales & purchase|Repair job cards with status & technician|Parts inventory|Customer dues|Warranty tracking|Installment sales|Daily cash book",
+ a:"Repair-time estimation|Fault-pattern insights|Auto status-update messages to customers",
+ w:"Mobile retailers, repair shops and service centres.",r:"Daily cash book, IMEI history, repair status, technician workload, customer dues",l:"Owner|Technician|Salesman"},
+{n:"HR, Payroll & Attendance System",i:"👥",c:["Finance"],ai:1,p:"Attendance to payslip, with EOBI and PESSI-ready deductions.",t:["Laravel","MySQL","AI"],
+ m:"Employee records|Attendance (biometric/QR/GPS)|Shifts & overtime|Leaves|Salary & advance/loan|Tax & EOBI/PESSI-ready deductions|Payslips|Performance reviews|Recruitment pipeline|Asset assignment",
+ a:"Attrition-risk prediction|Auto payroll anomaly checks|Resume screening/ranking|HR policy chatbot for employees",
+ w:"Factories, offices, schools and any company with a growing team.",r:"Payroll sheets, attendance, leave balance, overtime, loans, headcount",l:"Admin|HR Manager|Manager|Employee"}];
+SYS.forEach((s,k)=>{s.id=k;s.m=sp(s.m);s.a=sp(s.a);s.l=sp(s.l)});
 
-  /* ============================================================
-     ICONS (inline SVG paths)
-     ============================================================ */
-  const ICONS = {
-    school: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path d="M12 14v7"/></svg>',
-    installment: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
-    jewellery: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
-    inventory: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>',
-    pharmacy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v2H9V3zM8 5h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2z"/><path d="M12 10v6M9 13h6"/></svg>',
-    clinic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>',
-    realestate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>',
-    restaurant: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6"/><circle cx="12" cy="12" r="9"/></svg>',
-    mobile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M12 18h.01"/></svg>',
-    hr: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>'
-  };
+/* contact links */
+$$("[data-wa]").forEach(a=>{a.href=wa(a.dataset.wa);a.target="_blank";a.rel="noopener"});
+$$("[data-tel]").forEach(a=>{a.href="tel:"+OWNER.phone;if(!a.textContent.trim())a.textContent="Call Now"});
+$$("[data-ph]").forEach(a=>{a.href="https://wa.me/"+OWNER.whatsapp;a.textContent="📞 "+OWNER.phone});
+$("#ci").textContent=[OWNER.email,OWNER.city].filter(Boolean).join(" · ");
+$$("[data-s]").forEach(a=>{const u=OWNER.socials[a.dataset.s];if(u){a.href=u;a.target="_blank";a.rel="noopener"}});
 
-  /* ============================================================
-     RENDER SYSTEMS GRID
-     ============================================================ */
-  const grid = document.getElementById("systemsGrid");
+/* marquee */
+const mq=["Laravel","MySQL","AI","REST APIs","Schools","Clinics","Pharmacies","Jewellers","Retail","Real Estate","Restaurants","HR & Payroll"];
+$("#mq").innerHTML=[...mq,...mq].map(x=>`<span>${x}</span>`).join("");
 
-  function renderCards(filter = "all") {
-    grid.innerHTML = "";
-    const list = filter === "all" ? SYSTEMS : SYSTEMS.filter(s => s.filters.includes(filter));
-    list.forEach((s, i) => {
-      const card = document.createElement("article");
-      card.className = "sys-card reveal" + (s.featured ? " featured" : "");
-      card.style.transitionDelay = (i % 3) * 0.08 + "s";
-      card.dataset.id = s.id;
-      card.innerHTML = `
-        <div class="sys-icon">${ICONS[s.icon] || ""}</div>
-        <div class="sys-top">
-          <h3 class="sys-name">${s.name}</h3>
-          ${s.ai ? '<span class="ai-badge">AI</span>' : ""}
-        </div>
-        <p class="sys-pitch">${s.pitch}</p>
-        <ul class="sys-features">${s.features.map(f => `<li>${f}</li>`).join("")}</ul>
-        <div class="sys-tags">${s.tags.map(t => `<span class="sys-tag">${t}</span>`).join("")}</div>
-        <div class="sys-price">${CONFIG.prices[s.priceKey]}</div>
-        <button class="btn btn-ghost btn-sm btn-full view-details" data-id="${s.id}">View Details</button>
-      `;
-      grid.appendChild(card);
-    });
-    observeReveals();
-    // cursor spotlight
-    grid.querySelectorAll(".sys-card").forEach(card => {
-      card.addEventListener("pointermove", e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty("--mx", e.clientX - r.left + "px");
-        card.style.setProperty("--my", e.clientY - r.top + "px");
-      });
-    });
-  }
+/* grid + filters */
+const CATS=["All","AI-Powered","Retail","Education","Health","Finance","Property"];let cur="All";
+$("#filters").innerHTML=CATS.map(c=>`<button class="fc" aria-pressed="${c==="All"}">${c}</button>`).join("");
+function render(){$("#grid").innerHTML=SYS.filter(s=>cur==="All"||(cur==="AI-Powered"?s.ai:s.c.includes(cur))).map(s=>`
+<article class="glass spot sc ${s.ai?"ft":""}"><div class="ic" aria-hidden="true">${s.i}</div><h3>${s.n}${s.ai?'<span class="ai">AI</span>':""}</h3><p>${s.p}</p>
+<ul>${s.m.slice(0,5).map(x=>`<li>${x}</li>`).join("")}</ul><div class="tg">${s.t.map(x=>`<span>${x}</span>`).join("")}</div>
+<button class="btn" data-id="${s.id}">View Details</button></article>`).join("");spot()}
+$("#filters").onclick=e=>{const b=e.target.closest(".fc");if(!b)return;cur=b.textContent;$$(".fc").forEach(x=>x.setAttribute("aria-pressed",x===b));render()};
+$("#fl").innerHTML=SYS.map(s=>`<li>${s.n}</li>`).join("");
 
-  renderCards();
+/* modal with scroll-lock + focus return */
+let last;const ov=$("#ov"),md=$("#md");
+function open(id){const s=SYS[id];last=document.activeElement;
+md.innerHTML=`<button class="x" aria-label="Close">✕</button><h3 id="mt">${s.i} ${s.n}${s.ai?'<span class="ai">AI</span>':""}</h3><p>${s.p} Built on Laravel + MySQL and delivered with full source code, so it fits how your business already works.</p>
+<h4>Core modules</h4><ul>${s.m.map(x=>`<li>${x}</li>`).join("")}</ul><h4>AI features${s.ai?"":" (optional add-on)"}</h4><ul>${s.a.map(x=>`<li>✨ ${x}</li>`).join("")}</ul>
+<h4>Who it's for</h4><p>${s.w}</p><h4>Reports</h4><p>${s.r}</p><h4>Roles / logins</h4><ul>${s.l.map(x=>`<li>${x}</li>`).join("")}</ul>
+<div class="mk">🎁 Marketing Kit included: brochure, pitch deck, demo script, templates and more.</div>
+<a class="btn p" target="_blank" rel="noopener" href="${wa("Hi Muhammad Haris, I am interested in the "+s.n+". Please share a custom quote.")}">Get a Custom Quote on WhatsApp</a>`;
+ov.classList.add("open");document.body.classList.add("lock");$(".x",md).focus()}
+function close(){ov.classList.remove("open");document.body.classList.remove("lock");last&&last.focus()}
+$("#grid").onclick=e=>{const b=e.target.closest("[data-id]");if(b)open(+b.dataset.id)};
+ov.onclick=e=>{if(e.target===ov||e.target.closest(".x"))close()};
+document.addEventListener("keydown",e=>{if(!ov.classList.contains("open"))return;if(e.key==="Escape")close();
+if(e.key==="Tab"){const f=$$("button,a[href]",md);if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
 
-  // Filters
-  document.querySelectorAll(".filter-chip").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      renderCards(btn.dataset.filter);
-    });
-  });
+/* AI chat demo */
+const QA=[["Which customers are likely to default?","Based on payment history, 6 customers show high default risk this month. 4 of them missed their last two installments. I prepared WhatsApp reminders for each."],
+["Which items should I reorder?","12 items will run out within 7 days at current sales speed. I created a draft purchase order grouped by supplier."],
+["Show this month's profit summary","Sales are up 14% on last month and net profit is up 9%. Biggest driver: the top 5 fast movers. Slowest category: dead stock worth reviewing."],
+["Aaj ka collection kitna hua?","Aaj ki total collection 86 receipts ki hai, jis mein 71 on-time payments hain. 15 dues pending hain; reminder list tayyar hai."]];
+const cl=$("#cl");$("#qs").innerHTML=QA.map((q,i)=>`<button data-q="${i}">${q[0]}</button>`).join("");
+let busy=0;$("#qs").onclick=e=>{const b=e.target.closest("[data-q]");if(!b||busy)return;busy=1;const q=QA[b.dataset.q];
+cl.insertAdjacentHTML("beforeend",`<div class="cm u"></div>`);cl.lastChild.textContent=q[0];
+cl.insertAdjacentHTML("beforeend",`<div class="cm b"><span class="dots"><span></span><span></span><span></span></span></div>`);const m=cl.lastChild;
+setTimeout(()=>{m.textContent="";let k=0;const t=setInterval(()=>{m.textContent=q[1].slice(0,++k);if(k>=q[1].length){clearInterval(t);busy=0}},reduce?0:18)},900)};
 
-  /* ============================================================
-     MODAL
-     ============================================================ */
-  const overlay = document.getElementById("modalOverlay");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalBody = document.getElementById("modalBody");
-  const modalBadges = document.getElementById("modalBadges");
-  const modalWhatsApp = document.getElementById("modalWhatsApp");
+/* marketing bento */
+const MK=[["📘","Product brochure (PDF)","Print-ready or share on WhatsApp.",1],["🎤","Pitch deck","Slides that close meetings.",0],["🎬","Demo video script","Record a polished demo in one take.",0],["💬","WhatsApp broadcast templates","Announcements, offers and reminders.",0],["📱","Facebook/Instagram post pack","10 captions + creative ideas.",1],["📞","Cold-outreach scripts","Call and WhatsApp scripts that open doors.",0],["🧾","Quotation template","Professional quotes in minutes.",0],["📝","Client agreement template","Clear terms, ready to sign.",0],["🌐","Landing-page copy","Headlines and sections for your own page.",1],["🛡️","FAQ & objection-handling sheet","Answers for every 'but' you will hear.",1]];
+$("#bento").innerHTML=MK.map((x,i)=>`<div class="glass spot bn ${x[3]?"w":""} rv" style="--d:${(i%4)*.07}s"><div class="e">${x[0]}</div><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join("");
 
-  function openModal(id) {
-    const s = SYSTEMS.find(x => x.id === id);
-    if (!s) return;
-    modalTitle.textContent = s.name;
-    modalBadges.innerHTML = (s.ai ? '<span class="ai-badge">AI-Powered</span>' : "") +
-      `<span class="sys-tag">${CONFIG.prices[s.priceKey]}</span>`;
-    modalBody.innerHTML = `
-      <div class="modal-section"><h4>Overview</h4><p>${s.overview}</p></div>
-      <div class="modal-section"><h4>Core Modules</h4><ul>${s.modules.map(m => `<li>${m}</li>`).join("")}</ul></div>
-      <div class="modal-section"><h4>AI Features</h4><ul>${s.aiFeatures.map(m => `<li>${m}</li>`).join("")}</ul></div>
-      <div class="modal-section"><h4>Who It's For</h4><p>${s.who}</p></div>
-      <div class="modal-section"><h4>Key Reports</h4><ul>${s.reports.map(m => `<li>${m}</li>`).join("")}</ul></div>
-      <div class="modal-section"><h4>Roles / Logins</h4><div class="modal-roles">${s.roles.map(r => `<span>${r}</span>`).join("")}</div></div>
-      <div class="modal-section"><h4>Marketing Kit Included</h4><p>Product brochure (PDF), pitch deck, demo video script, WhatsApp broadcast templates, Facebook/Instagram post pack (10 captions + ideas), cold-outreach scripts, pricing & quotation template, client agreement template, landing-page copy, FAQ & objection-handling sheet.</p></div>
-    `;
-    const msg = encodeURIComponent(`Assalam o Alaikum! I want a demo of the ${s.name}. Please share details and availability.`);
-    modalWhatsApp.href = `https://wa.me/${CONFIG.phone}?text=${msg}`;
-    overlay.hidden = false;
-    overlay.classList.add("open");
-    document.body.style.overflow = "hidden";
-    document.getElementById("modalClose").focus();
-  }
+/* FAQ */
+const FQ=[["How long does delivery take?","Most systems are delivered within a few weeks, depending on size and customization. You will see a live demo before the trial starts."],
+["Do I own the source code?","Yes. The complete source code is delivered at final handover, and it is yours."],
+["Who handles hosting?","Domain and hosting are set up in your name. We can guide you or deploy it for you."],
+["Can the system be customized?","Yes. Each system is a strong base that we adapt to your workflow. Changes beyond the agreed list are quoted separately."],
+["How do the AI features work?","AI modules give insights, predictions, draft text and chat-style answers inside the system. Each system lists its own AI features."],
+["How does payment work?","Flexible milestone-based plan, shared privately on WhatsApp."],
+["What is the 15-day trial?","You use the finished system in your real business for 15 days with free changes until you are satisfied."],
+["Do you provide support after delivery?","Yes. Fast support on WhatsApp and phone for questions and fixes after delivery."]];
+$("#fq").innerHTML=FQ.map((f,i)=>`<div class="glass fi rv"><h3 style="font-size:inherit"><button aria-expanded="false" aria-controls="fa${i}" id="fb${i}">${f[0]}</button></h3><div class="fa" id="fa${i}" role="region" aria-labelledby="fb${i}"><div>${f[1]}</div></div></div>`).join("");
+$("#fq").onclick=e=>{const b=e.target.closest("button");if(!b)return;const o=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",!o);$("#"+b.getAttribute("aria-controls")).classList.toggle("open",!o)};
 
-  function closeModal() {
-    overlay.classList.remove("open");
-    document.body.style.overflow = "";
-    setTimeout(() => { overlay.hidden = true; }, 300);
-  }
+/* contact form -> WhatsApp */
+$("#form").onsubmit=e=>{e.preventDefault();open_=wa(`Hi Muhammad Haris,\nName: ${$("#fn").value}\nPhone: ${$("#fp").value}\nBusiness: ${$("#ft").value}\nMessage: ${$("#fm").value}`);window.open(open_,"_blank","noopener")};var open_;
 
-  document.getElementById("systemsGrid").addEventListener("click", e => {
-    const btn = e.target.closest(".view-details");
-    if (btn) openModal(btn.dataset.id);
-  });
-  document.getElementById("modalClose").addEventListener("click", closeModal);
-  document.getElementById("modalClose2").addEventListener("click", closeModal);
-  overlay.addEventListener("click", e => { if (e.target === overlay) closeModal(); });
-  document.addEventListener("keydown", e => { if (e.key === "Escape" && overlay.classList.contains("open")) closeModal(); });
+/* theme (persisted) */
+const root=document.documentElement,tb=$("#theme");
+function setT(t){root.dataset.theme=t;tb.textContent=t==="dark"?"🌙":"☀️"}
+try{setT(localStorage.getItem("sl-theme")||"dark")}catch(e){setT("dark")}
+tb.onclick=()=>{const t=root.dataset.theme==="dark"?"light":"dark";setT(t);try{localStorage.setItem("sl-theme",t)}catch(e){}};
 
-  /* ============================================================
-     AI CHAT MOCK
-     ============================================================ */
-  const aiAnswers = {
-    "Show defaulters of last 3 months": "Last 3 months mein 47 customers ne payment miss ki hai. Un mein se 12 high-risk score (AI) ke saath hain. Top 5: Ahmed Traders (PKR 84,000), Bilal Electronics (PKR 62,500), … Full list export kar sakte hain.",
-    "Which products are slow movers?": "Inventory analysis: 18 SKUs ne last 60 days mein 2 se kam units move kiye. Sab se slow: Model X-200 (0 units), Charger Pack C3 (1 unit). Dead-stock value ≈ PKR 1.2 Lakh. Reorder band karne ki recommendation hai.",
-    "Predict collection for next week": "AI forecast: agle 7 din mein expected collection PKR 9.4 Lakh (±8%). Peak din: Wednesday. 23 accounts due hain; 6 high-risk flagged — unke liye recovery reminder templates ready hain."
-  };
+/* mobile menu */
+const bg=$("#burger"),lk=$("#links");bg.onclick=()=>{const o=lk.classList.toggle("open");bg.setAttribute("aria-expanded",o)};
+lk.onclick=e=>{if(e.target.tagName==="A"){lk.classList.remove("open");bg.setAttribute("aria-expanded",false)}};
 
-  const messagesEl = document.getElementById("aiMessages");
-  document.getElementById("aiSuggestions").addEventListener("click", e => {
-    const btn = e.target.closest(".ai-sug");
-    if (!btn) return;
-    const q = btn.dataset.q;
-    const userMsg = document.createElement("div");
-    userMsg.className = "msg user";
-    userMsg.textContent = q;
-    messagesEl.appendChild(userMsg);
+/* reveal, counters, active nav */
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function count(el){const t=+el.dataset.c;if(reduce){el.textContent=t;return}const s=performance.now();(function f(n){const p=Math.min((n-s)/1400,1);el.textContent=Math.round(t*(1-Math.pow(1-p,3)));p<1&&requestAnimationFrame(f)})(s)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");$$("[data-c]",e.target).forEach(count);io.unobserve(e.target)}}),{threshold:.15});
+$$(".rv").forEach(x=>io.observe(x));$$(".dash").forEach(d=>$$("[data-c]",d).forEach(count));
+const ids=["systems","ai","marketing","process","about","faq","contact"];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$("#links a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});
+ids.forEach(i=>so.observe($("#"+i)));
 
-    const typing = document.createElement("div");
-    typing.className = "typing";
-    typing.innerHTML = "<span></span><span></span><span></span>";
-    messagesEl.appendChild(typing);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+/* cursor spotlight on cards */
+function spot(){$$(".spot").forEach(c=>{if(c._s)return;c._s=1;c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();c.style.setProperty("--mx",e.clientX-r.left+"px");c.style.setProperty("--my",e.clientY-r.top+"px")})})}
 
-    setTimeout(() => {
-      typing.remove();
-      const bot = document.createElement("div");
-      bot.className = "msg bot";
-      bot.textContent = aiAnswers[q] || "Main is sawal ka jawab system data se de sakta hoon jab live connected ho.";
-      messagesEl.appendChild(bot);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }, 1400);
-  });
+/* owner photo: fallback avatar + tilt */
+const ph=$("#ownerPhoto");ph.src=OWNER.photo;
+ph.onerror=()=>{ph.onerror=null;ph.outerHTML=`<svg id="ownerPhoto" viewBox="0 0 400 500" role="img" aria-label="Muhammad Haris - Founder of Solvers-Lance"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#0891b2"/></linearGradient></defs><rect width="400" height="500" fill="url(#ag)"/><text x="200" y="285" text-anchor="middle" font-family="Sora,sans-serif" font-size="150" font-weight="700" fill="#fff">MH</text></svg>`};
+if(!reduce&&matchMedia("(hover:hover)").matches){const ring=$("#ring"),box=$(".ph");
+box.addEventListener("pointermove",e=>{const r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ring.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg)`});
+box.addEventListener("pointerleave",()=>ring.style.transform="")}
 
-  /* ============================================================
-     FAQ ACCORDION
-     ============================================================ */
-  document.getElementById("faqList").addEventListener("click", e => {
-    const btn = e.target.closest(".faq-q");
-    if (!btn) return;
-    const item = btn.parentElement;
-    const open = item.classList.contains("open");
-    document.querySelectorAll(".faq-item").forEach(i => {
-      i.classList.remove("open");
-      i.querySelector(".faq-q").setAttribute("aria-expanded", "false");
-    });
-    if (!open) {
-      item.classList.add("open");
-      btn.setAttribute("aria-expanded", "true");
-    }
-  });
-
-  /* ============================================================
-     CONTACT FORM → WhatsApp
-     ============================================================ */
-  function waLink(text) {
-    return `https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(text)}`;
-  }
-
-  document.getElementById("contactForm").addEventListener("submit", e => {
-    e.preventDefault();
-    const name = document.getElementById("cf-name").value.trim();
-    const phone = document.getElementById("cf-phone").value.trim();
-    const type = document.getElementById("cf-type").value;
-    const msg = document.getElementById("cf-msg").value.trim();
-    const body = `Assalam o Alaikum! New inquiry from Solvers-Lance website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${type}\nMessage: ${msg || "—"}`;
-    window.open(waLink(body), "_blank");
-  });
-
-  document.getElementById("directWhatsApp").href = waLink(CONFIG.whatsappMessage);
-
-  /* ============================================================
-     THEME TOGGLE
-     ============================================================ */
-  const root = document.documentElement;
-  const themeBtn = document.getElementById("themeToggle");
-  const iconMoon = themeBtn.querySelector(".icon-moon");
-  const iconSun = themeBtn.querySelector(".icon-sun");
-
-  function applyTheme(t) {
-    root.setAttribute("data-theme", t);
-    iconMoon.style.display = t === "dark" ? "block" : "none";
-    iconSun.style.display = t === "light" ? "block" : "none";
-    try { localStorage.setItem("sl-theme", t); } catch (_) {}
-  }
-
-  let saved = "dark";
-  try { saved = localStorage.getItem("sl-theme") || "dark"; } catch (_) {}
-  applyTheme(saved);
-
-  themeBtn.addEventListener("click", () => {
-    applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
-  });
-
-  /* ============================================================
-     MOBILE MENU
-     ============================================================ */
-  const hamburger = document.getElementById("hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
-  hamburger.addEventListener("click", () => {
-    const open = mobileMenu.classList.toggle("open");
-    hamburger.classList.toggle("open", open);
-    hamburger.setAttribute("aria-expanded", open);
-  });
-  mobileMenu.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-      hamburger.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  /* ============================================================
-     SCROLL REVEAL + ACTIVE NAV
-     ============================================================ */
-  function observeReveals() {
-    const els = document.querySelectorAll(".reveal:not(.visible)");
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (en.isIntersecting) {
-          en.target.classList.add("visible");
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    els.forEach(el => io.observe(el));
-  }
-  observeReveals();
-
-  // Counters
-  const counterIO = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const el = en.target;
-      const target = parseInt(el.dataset.count || el.textContent, 10);
-      const suffix = el.dataset.suffix || (el.dataset.count ? "+" : "");
-      if (el.dataset.counted) return;
-      el.dataset.counted = "1";
-      const duration = 1400;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.floor(eased * target) + suffix;
-        if (p < 1) requestAnimationFrame(tick);
-        else el.textContent = target + suffix;
-      }
-      requestAnimationFrame(tick);
-      counterIO.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll(".stat-num").forEach(el => counterIO.observe(el));
-
-  // Active section highlight
-  const sections = ["systems", "ai-power", "marketing", "process", "pricing", "contact"];
-  const navLinks = document.querySelectorAll(".nav-links a");
-  const sectionIO = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        const id = en.target.id;
-        navLinks.forEach(a => {
-          a.classList.toggle("active", a.getAttribute("href") === "#" + id);
-        });
-      }
-    });
-  }, { rootMargin: "-40% 0px -50% 0px" });
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) sectionIO.observe(el);
-  });
-
-  /* ============================================================
-     FOOTER / CONTACT PLACEHOLDERS
-     ============================================================ */
-  document.getElementById("footerPhone").textContent = CONFIG.phone ? `+${CONFIG.phone}` : "[Phone / WhatsApp]";
-  document.getElementById("footerPhone").href = CONFIG.phone ? `https://wa.me/${CONFIG.phone}` : "#";
-  document.getElementById("footerEmail").textContent = CONFIG.email;
-  document.getElementById("footerEmail").href = CONFIG.email.startsWith("[") ? "#" : `mailto:${CONFIG.email}`;
-  document.getElementById("socialFb").href = CONFIG.social.facebook;
-  document.getElementById("socialIg").href = CONFIG.social.instagram;
-  document.getElementById("socialLi").href = CONFIG.social.linkedin;
-  </script>
+render();
+</script>
 </body>
 </html>
-```
